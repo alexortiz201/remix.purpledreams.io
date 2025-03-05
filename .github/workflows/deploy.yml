@@ -31,7 +31,7 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: 🏄 Copy test env vars
-        run: cp .env.example .env 
+        run: cp .env.example .env
 
       - name: 🛠 Setup Database
         run: npx prisma migrate deploy && npx prisma generate --sql
@@ -58,7 +58,7 @@ jobs:
         run: npm run build
 
       - name: 🏄 Copy test env vars
-        run: cp .env.example .env 
+        run: cp .env.example .env
 
       - name: 🛠 Setup Database
         run: npx prisma migrate deploy && npx prisma generate --sql
@@ -82,7 +82,7 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: 🏄 Copy test env vars
-        run: cp .env.example .env 
+        run: cp .env.example .env
 
       - name: 🛠 Setup Database
         run: npx prisma migrate deploy && npx prisma generate --sql

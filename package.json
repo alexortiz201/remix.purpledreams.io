@@ -1,12 +1,12 @@
 {
-  "name": "epic-stack-template",
+  "name": "remix-purpledreams-io-dae0",
   "private": true,
   "sideEffects": false,
-  "license": "MIT",
-  "author": "Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com/)",
   "type": "module",
   "imports": {
+    "#*": "./*",
     "#app/*": "./app/*",
+    "#utils/*": "./app/utils/*",
     "#tests/*": "./tests/*"
   },
   "scripts": {
@@ -45,6 +45,10 @@
     "@epic-web/invariant": "^1.0.0",
     "@epic-web/remember": "^1.1.0",
     "@epic-web/totp": "^4.0.1",
+    "@keystatic/core": "^0.5.46",
+    "@keystatic/remix": "^5.0.3",
+    "@markdoc/markdoc": "^0.5.1",
+    "@mdx-js/react": "^3.1.0",
     "@mjackson/form-data-parser": "^0.7.0",
     "@mjackson/headers": "^0.10.0",
     "@nasa-gcn/remix-seo": "^2.0.1",
@@ -91,6 +95,7 @@
     "isbot": "^5.1.25",
     "litefs-js": "^1.1.2",
     "lru-cache": "^11.0.2",
+    "mdx-bundler": "^10.1.1",
     "mime-types": "^2.1.35",
     "morgan": "^1.10.0",
     "openimg": "^0.7.0",
@@ -118,6 +123,7 @@
     "@playwright/test": "^1.51.1",
     "@react-router/dev": "^7.4.0",
     "@sly-cli/sly": "^1.14.0",
+    "@tailwindcss/typography": "^0.5.16",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",

@@ -12,7 +12,11 @@
 </div>
 
 ```sh
+<<<<<<< HEAD
 npx epicli
+=======
+npx create-epic-app@latest
+>>>>>>> fd97c08 (Init)
 ```
 
 [![The Epic Stack](https://github-production-user-asset-6210df.s3.amazonaws.com/1500684/246885449-1b00286c-aa3d-44b2-9ef2-04f694eb3592.png)](https://www.epicweb.dev/epic-stack)

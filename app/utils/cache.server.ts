@@ -46,7 +46,6 @@ function createDatabase(tryAgain = true): DatabaseSync {
 		}
 		throw error
 	}
-
 	return db
 }
 
