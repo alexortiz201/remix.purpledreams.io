@@ -227,10 +227,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+	font-family: 'weblysleek_uilight';
+	src: url('../assets/fonts/weblysleekuil.eot');
+	src: url('../assets/fonts/weblysleekuil.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/weblysleekuil.woff2') format('woff2'), url('../assets/fonts/weblysleekuil.woff') format('woff'), url('../assets/fonts/weblysleekuil.ttf') format('truetype'), url('../assets/fonts/weblysleekuil.svg#weblysleek_uilight') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'LiberationMonoRegular';
+	src: url('../assets/fonts/liberation-mono-webfont.eot');
+	src: url('../assets/fonts/liberation-mono-webfont.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/liberation-mono-webfont.woff') format('woff'), url('../assets/fonts/liberation-mono-webfont.ttf') format('truetype'), url('../assets/fonts/liberation-mono-webfont.svg#LiberationMonoRegular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
 @layer base {
 	:root {
-		/* --font-sans: here if you have one */
-		/* --font-mono: here if you got it... */
+		/* --overlay-color: #2c2d33; */
+		--gray: #d4d4d4;
+		--red: #ee5f5b;
+		--blue: #19B5FE;
+		--yellow: #f89406;
+		--aqua: #7FDBFF;
+
+		--purple: #AB1FD8;
+		--turquois: #00FFE0;
+		--green: #ABC65D;
+		--orange: #DFB626;
+		--pink: #fe57a1;
+
+		--font-sans: "weblysleek_uilight", sans-serif;
+		--font-mono: "LiberationMonoRegular", monospace;
 
 		/* prefixed with foreground because it should look good on the background */
 		--foreground-destructive: 345 82.7% 40.8%;

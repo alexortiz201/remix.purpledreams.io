@@ -8,7 +8,7 @@ import { cn } from '#app/utils/misc.tsx'
 import { type Route } from './+types/index.ts'
 import { logos } from './logos/logos.ts'
 
-export const meta: Route.MetaFunction = () => [{ title: 'Epic Notes' }]
+export const meta: Route.MetaFunction = () => [{ title: 'Purple Dreams' }]
 
 // Tailwind Grid cell classes lookup
 const columnClasses: Record<(typeof logos)[number]['column'], string> = {
@@ -30,7 +30,7 @@ const rowClasses: Record<(typeof logos)[number]['row'], string> = {
 export default function Index() {
 	return (
 		<main className="font-poppins grid h-full place-items-center">
-			<div className="grid place-items-center px-4 py-16 xl:grid-cols-2 xl:gap-24">
+			<div className="grid place-items-center px-4 py-16 xl:grid-cols-1 xl:gap-24">
 				<div className="flex max-w-md flex-col items-center text-center xl:order-2 xl:items-start xl:text-left">
 					<a
 						href="https://www.epicweb.dev/stack"
@@ -52,7 +52,7 @@ export default function Index() {
 						data-heading
 						className="mt-8 animate-slide-top text-4xl font-medium text-foreground [animation-delay:0.3s] [animation-fill-mode:backwards] md:text-5xl xl:mt-4 xl:animate-slide-left xl:text-6xl xl:[animation-delay:0.8s] xl:[animation-fill-mode:backwards]"
 					>
-						<a href="https://www.epicweb.dev/stack">The Epic Stack</a>
+						<a href="https://www.epicweb.dev/stack">Purple Dreams</a>
 					</h1>
 					<p
 						data-paragraph
@@ -68,7 +68,7 @@ export default function Index() {
 						file for how to get your project off the ground!
 					</p>
 				</div>
-				<ul className="mt-16 flex max-w-3xl flex-wrap justify-center gap-2 sm:gap-4 xl:mt-0 xl:grid xl:grid-flow-col xl:grid-cols-5 xl:grid-rows-6">
+				{/* <ul className="mt-16 flex max-w-3xl flex-wrap justify-center gap-2 sm:gap-4 xl:mt-0 xl:grid xl:grid-flow-col xl:grid-cols-5 xl:grid-rows-6">
 					<TooltipProvider>
 						{logos.map((logo, i) => (
 							<li
@@ -94,7 +94,7 @@ export default function Index() {
 							</li>
 						))}
 					</TooltipProvider>
-				</ul>
+				</ul> */}
 			</div>
 		</main>
 	)

@@ -12,8 +12,8 @@ import {
 } from 'react-router'
 import { HoneypotProvider } from 'remix-utils/honeypot/react'
 import { type Route } from './+types/root.ts'
-import appleTouchIconAssetUrl from './assets/favicons/apple-touch-icon.png'
-import faviconAssetUrl from './assets/favicons/favicon.svg'
+// import appleTouchIconAssetUrl from './assets/favicons/apple-touch-icon.png'
+// import faviconAssetUrl from './assets/favicons/favicon.ico'
 import { GeneralErrorBoundary } from './components/error-boundary.tsx'
 import { EpicProgress } from './components/progress-bar.tsx'
 import { SearchBar } from './components/search-bar.tsx'
@@ -50,8 +50,8 @@ export const links: Route.LinksFunction = () => {
 			href: '/favicon.ico',
 			sizes: '48x48',
 		},
-		{ rel: 'icon', type: 'image/svg+xml', href: faviconAssetUrl },
-		{ rel: 'apple-touch-icon', href: appleTouchIconAssetUrl },
+		// { rel: 'icon', type: 'image/svg+xml', href: faviconAssetUrl },
+		// { rel: 'apple-touch-icon', href: faviconAssetUrl },
 		{
 			rel: 'manifest',
 			href: '/site.webmanifest',
@@ -63,8 +63,8 @@ export const links: Route.LinksFunction = () => {
 
 export const meta: Route.MetaFunction = ({ data }) => {
 	return [
-		{ title: data ? 'Epic Notes' : 'Error | Epic Notes' },
-		{ name: 'description', content: `Your own captain's log` },
+		{ title: data ? 'Purple Dreams' : 'Error | Purple Dreams' },
+		{ name: 'description', content: `Welcome to my Purple Dreams` },
 	]
 }
 
@@ -199,33 +199,36 @@ function App() {
 			optimizerEndpoint="/resources/images"
 			getSrc={getImgSrc}
 		>
-			<div className="flex min-h-screen flex-col justify-between">
-				<header className="container py-6">
-					<nav className="flex flex-wrap items-center justify-between gap-4 sm:flex-nowrap md:gap-8">
+			<div className="grid grid-cols-2 min-h-screen">
+				<div className="flex min-h-screen flex-col justify-between col-[1] bg-[url(/img/home.png)] bg-cover"></div>
+				<div className="flex min-h-screen flex-col justify-between col-[2]">
+					<header className="container py-6">
+						<nav className="flex flex-wrap items-center justify-between gap-4 sm:flex-nowrap md:gap-8">
+							<Logo />
+							<div className="ml-auto hidden max-w-sm flex-1 sm:block">
+								{searchBar}
+							</div>
+							{/* <div className="flex items-center gap-10">
+								{user ? (
+									<UserDropdown />
+								) : (
+									<Button asChild variant="default" size="lg">
+										<Link to="/login">Log In</Link>
+									</Button>
+								)}
+							</div> */}
+							<div className="block w-full sm:hidden">{searchBar}</div>
+						</nav>
+					</header>
+
+					<div className="flex flex-1 flex-col">
+						<Outlet />
+					</div>
+
+					<div className="container flex justify-between pb-5">
 						<Logo />
-						<div className="ml-auto hidden max-w-sm flex-1 sm:block">
-							{searchBar}
-						</div>
-						<div className="flex items-center gap-10">
-							{user ? (
-								<UserDropdown />
-							) : (
-								<Button asChild variant="default" size="lg">
-									<Link to="/login">Log In</Link>
-								</Button>
-							)}
-						</div>
-						<div className="block w-full sm:hidden">{searchBar}</div>
-					</nav>
-				</header>
-
-				<div className="flex flex-1 flex-col">
-					<Outlet />
-				</div>
-
-				<div className="container flex justify-between pb-5">
-					<Logo />
-					<ThemeSwitch userPreference={data.requestInfo.userPrefs.theme} />
+						<ThemeSwitch userPreference={data.requestInfo.userPrefs.theme} />
+					</div>
 				</div>
 			</div>
 			<EpicToaster closeButton position="top-center" theme={theme} />
@@ -238,10 +241,10 @@ function Logo() {
 	return (
 		<Link to="/" className="group grid leading-snug">
 			<span className="font-light transition group-hover:-translate-x-1">
-				epic
+				tart
 			</span>
 			<span className="font-bold transition group-hover:translate-x-1">
-				notes
+				tart
 			</span>
 		</Link>
 	)
