@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 @import 'tailwindcss';
 @import "tw-animate-css";
 
@@ -38,6 +38,24 @@
 	--foreground-destructive: oklch(51.46% 0.1979 16.57);
 
 	--ring: oklch(71.07% 0.0351 256.79);
+
+	--color-gray-333: #333333;
+	--tw-prose-invert-pre-bg: #150f1e;
+
+	--gray: #d4d4d4;
+	--red: #ee5f5b;
+	--blue: #19b5fe;
+	--yellow: #f89406;
+	--aqua: #7fdbff;
+
+	--purple: #3b1f5c;
+	--turquois: #33ccba;
+	--green: #abc65d;
+	--orange: #dfb626;
+	--pink: #fe57a1;
+
+	--font-sans: 'weblysleek_uilight', sans-serif;
+	--font-mono: 'LiberationMonoRegular', monospace;
 }
 
 .dark {
@@ -222,15 +240,16 @@
 		border-color: hsl(var(--border));
 	}
 }
-=======
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @font-face {
 	font-family: 'weblysleek_uilight';
 	src: url('../assets/fonts/weblysleekuil.eot');
-	src: url('../assets/fonts/weblysleekuil.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/weblysleekuil.woff2') format('woff2'), url('../assets/fonts/weblysleekuil.woff') format('woff'), url('../assets/fonts/weblysleekuil.ttf') format('truetype'), url('../assets/fonts/weblysleekuil.svg#weblysleek_uilight') format('svg');
+	src:
+		url('../assets/fonts/weblysleekuil.eot?#iefix') format('embedded-opentype'),
+		url('../assets/fonts/weblysleekuil.woff2') format('woff2'),
+		url('../assets/fonts/weblysleekuil.woff') format('woff'),
+		url('../assets/fonts/weblysleekuil.ttf') format('truetype'),
+		url('../assets/fonts/weblysleekuil.svg#weblysleek_uilight') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -238,98 +257,44 @@
 @font-face {
 	font-family: 'LiberationMonoRegular';
 	src: url('../assets/fonts/liberation-mono-webfont.eot');
-	src: url('../assets/fonts/liberation-mono-webfont.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/liberation-mono-webfont.woff') format('woff'), url('../assets/fonts/liberation-mono-webfont.ttf') format('truetype'), url('../assets/fonts/liberation-mono-webfont.svg#LiberationMonoRegular') format('svg');
+	src:
+		url('../assets/fonts/liberation-mono-webfont.eot?#iefix') format('embedded-opentype'),
+		url('../assets/fonts/liberation-mono-webfont.woff') format('woff'),
+		url('../assets/fonts/liberation-mono-webfont.ttf') format('truetype'),
+		url('../assets/fonts/liberation-mono-webfont.svg#LiberationMonoRegular') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
 
-@layer base {
-	:root {
-		/* --overlay-color: #2c2d33; */
-		--gray: #d4d4d4;
-		--red: #ee5f5b;
-		--blue: #19B5FE;
-		--yellow: #f89406;
-		--aqua: #7FDBFF;
+/* /img/home.png */
 
-		--purple: #AB1FD8;
-		--turquois: #00FFE0;
-		--green: #ABC65D;
-		--orange: #DFB626;
-		--pink: #fe57a1;
-
-		--font-sans: "weblysleek_uilight", sans-serif;
-		--font-mono: "LiberationMonoRegular", monospace;
-
-		/* prefixed with foreground because it should look good on the background */
-		--foreground-destructive: 345 82.7% 40.8%;
-
-		--background: 0 0% 100%;
-		--foreground: 222.2 84% 4.9%;
-
-		--muted: 210 40% 93%;
-		--muted-foreground: 215.4 16.3% 30%;
-
-		--popover: 0 0% 100%;
-		--popover-foreground: 222.2 84% 4.9%;
-
-		--card: 0 0% 100%;
-		--card-foreground: 222.2 84% 4.9%;
-
-		--border: 214.3 31.8% 91.4%;
-		--input: 214.3 31.8% 91.4%;
-		--input-invalid: 0 84.2% 60.2%;
-
-		--primary: 222.2 47.4% 11.2%;
-		--primary-foreground: 210 40% 98%;
-
-		--secondary: 210 20% 83%;
-		--secondary-foreground: 222.2 47.4% 11.2%;
-
-		--accent: 210 40% 90%;
-		--accent-foreground: 222.2 47.4% 11.2%;
-
-		--destructive: 0 70% 50%;
-		--destructive-foreground: 210 40% 98%;
-
-		--ring: 215 20.2% 65.1%;
-
-		--radius: 0.5rem;
-	}
-
-	.dark {
-		--background: 222.2 84% 4.9%;
-		--foreground: 210 40% 98%;
-
-		/* prefixed with foreground because it should look good on the background */
-		--foreground-destructive: -4 84% 60%;
-
-		--muted: 217.2 32.6% 12%;
-		--muted-foreground: 215 20.2% 65.1%;
-
-		--popover: 222.2 84% 4.9%;
-		--popover-foreground: 210 40% 98%;
-
-		--card: 222.2 84% 4.9%;
-		--card-foreground: 210 40% 98%;
-
-		--border: 217.2 32.6% 17.5%;
-		--input: 217.2 32.6% 17.5%;
-		--input-invalid: 0 62.8% 30.6%;
-
-		--primary: 210 40% 98%;
-		--primary-foreground: 222.2 47.4% 11.2%;
-
-		--secondary: 217.2 20% 24%;
-		--secondary-foreground: 210 40% 98%;
-
-		--accent: 217.2 32.6% 10%;
-		--accent-foreground: 210 40% 98%;
-
-		--destructive: 0 60% 40%;
-		--destructive-foreground: 0 85.7% 97.3%;
-
-		--ring: 217.2 32.6% 60%;
+.social-btn {
+	&:hover {
+		color: var(--green);
+		transition-duration: 0.3s;
+		transition-property: color;
 	}
 }
->>>>>>> fd97c08 (Init)
+
+@layer keystatic {
+	.keystatic__logo-width {
+		width: 35px;
+	}
+}
+
+.keystatic__blog {
+	text-wrap-mode: wrap;
+
+	& pre {
+		font-size: .75rem;
+	}
+
+	& code {
+		font-size: .75rem;
+		background-color: var(--tw-prose-invert-pre-bg);
+		padding: 8px 4px;
+		margin: 0 4px;
+	}
+}
+
+/* underline decoration-[var(--green)] decoration-[3px] */

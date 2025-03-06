@@ -29,6 +29,7 @@ import {
 } from './routes/resources+/theme-switch.tsx'
 import tailwindStyleSheetUrl from './styles/tailwind.css?url'
 import { getUserId, logout } from './utils/auth.server.ts'
+import { CanvasAnimation } from './components/canvas.tsx'
 import { ClientHintCheck, getHints } from './utils/client-hints.tsx'
 import { prisma } from './utils/db.server.ts'
 import { getEnv } from './utils/env.server.ts'
@@ -40,6 +41,7 @@ import { type Theme, getTheme } from './utils/theme.server.ts'
 import { makeTimings, time } from './utils/timing.server.ts'
 import { getToast } from './utils/toast.server.ts'
 import { useOptionalUser } from './utils/user.ts'
+import { LeftPanel } from './components/left-panel.tsx'
 
 export const links: Route.LinksFunction = () => {
 	return [
@@ -200,7 +202,7 @@ function App() {
 			getSrc={getImgSrc}
 		>
 			<div className="grid grid-cols-2 min-h-screen">
-				<div className="flex min-h-screen flex-col justify-between col-[1] bg-[url(/img/home.png)] bg-cover"></div>
+				<LeftPanel />
 				<div className="flex min-h-screen flex-col justify-between col-[2]">
 					<header className="container py-6">
 						<nav className="flex flex-wrap items-center justify-between gap-4 sm:flex-nowrap md:gap-8">
@@ -241,10 +243,10 @@ function Logo() {
 	return (
 		<Link to="/" className="group grid leading-snug">
 			<span className="font-light transition group-hover:-translate-x-1">
-				tart
+				purple
 			</span>
 			<span className="font-bold transition group-hover:translate-x-1">
-				tart
+				dreams
 			</span>
 		</Link>
 	)
