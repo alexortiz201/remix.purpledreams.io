@@ -21,6 +21,8 @@
 @layer base {
 	:root {
 		/* --overlay-color: #2c2d33; */
+		--color-gray-333: #333333;
+
 		--gray: #d4d4d4;
 		--red: #ee5f5b;
 		--blue: #19B5FE;
@@ -106,4 +108,11 @@
 
 		--ring: 217.2 32.6% 60%;
 	}
+}
+
+.left-panel {
+	background:
+		linear-gradient(rgba(44, 45, 51, 0.9), rgba(44, 45, 51, 0.9)),
+		url('/img/home.png');
+	background-size: cover;
 }
