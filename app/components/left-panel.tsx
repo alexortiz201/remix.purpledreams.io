@@ -2,19 +2,21 @@ import { CanvasAnimation } from "./canvas"
 
 const Content = () => {
   return (
-    <div className="grid place-items-center px-4 py-16 xl:grid-cols-1 xl:gap-24">
+    <div className="grid place-items-center px-4 py-16 xl:grid-cols-1 xl:gap-24 font-light">
       <div className="flex max-w-md flex-col items-center text-center xl:order-2 xl:items-center xl:text-left">
         <a
           href="https://purpledreams.io"
-          className="animate-slide-top [animation-fill-mode:backwards] xl:animate-slide-left xl:[animation-delay:0.5s] xl:[animation-fill-mode:backwards] w-[200px]"
+          className="a__logo-link animate-slide-top [animation-fill-mode:backwards] xl:animate-slide-left xl:[animation-delay:0.5s] xl:[animation-fill-mode:backwards] w-[150px]"
         >
-          <img src="/img/logo.png" />
+          <img src="/img/logo04.png" />
         </a>
         <h1
           data-heading
-          className="mt-8 animate-slide-top text-4xl font-medium text-foreground [animation-delay:0.3s] [animation-fill-mode:backwards] md:text-5xl xl:mt-4 xl:animate-slide-left xl:text-6xl xl:[animation-delay:0.8s] xl:[animation-fill-mode:backwards]"
+          className="mt-8 animate-slide-top text-4xl text-foreground [animation-delay:0.3s] [animation-fill-mode:backwards] md:text-5xl xl:mt-4 xl:animate-slide-left xl:text-6xl xl:[animation-delay:0.8s] xl:[animation-fill-mode:backwards]"
         >
-          <a href="https://www.purpledreams.io">Purple Dreams</a>
+          <a href="https://www.purpledreams.io" className="border-animation">
+            <span className="border-animation">Purple Dreams</span>
+          </a>
         </h1>
         <p
           data-paragraph
@@ -61,9 +63,9 @@ const Content = () => {
   )
 }
 
-export const LeftPanel = () => {
+export const LeftPanel = ({ className } : { className?: string } = {}) => {
   return (
-    <div className="flex min-h-screen flex-col justify-between col-[1] relative">
+    <div className={`flex min-h-screen flex-col place-content-center col-[1] relative ${className}`}>
       <div className="flex flex-1 flex-col w-full absolute">
         <Content />
       </div>
