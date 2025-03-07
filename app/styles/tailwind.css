@@ -29,7 +29,7 @@
 		--yellow: #f89406;
 		--aqua: #7FDBFF;
 
-		--purple: #AB1FD8;
+		--purple: #aa1fd9;
 		--turquois: #00FFE0;
 		--green: #ABC65D;
 		--orange: #DFB626;
@@ -37,7 +37,7 @@
 
 		--font-sans: "weblysleek_uilight", sans-serif;
 		--font-mono: "LiberationMonoRegular", monospace;
-
+/* via-turquois via-green via-orange to-pink */
 		/* prefixed with foreground because it should look good on the background */
 		--foreground-destructive: 345 82.7% 40.8%;
 
@@ -75,7 +75,7 @@
 	}
 
 	.dark {
-		--background: 222.2 84% 4.9%;
+		--background: 285 84% 3%; /* PURPLE: #0b010e,  GRAY: 222.2 84% 4.9%; */
 		--foreground: 210 40% 98%;
 
 		/* prefixed with foreground because it should look good on the background */
@@ -113,6 +113,25 @@
 .left-panel {
 	background:
 		linear-gradient(rgba(44, 45, 51, 0.9), rgba(44, 45, 51, 0.9)),
-		url('/img/home.png');
+		url('/img/home.png'); /* /img/home.png */
 	background-size: cover;
+	/*
+	background-position: 50% 4%;
+	background-size: 113% 208%;
+	background-repeat: no-repeat;
+	*/
+}
+
+.a__logo-link {
+	& img {
+		filter: drop-shadow(2px 2px 2px #222);
+	}
+}
+
+.border-animation {
+	/*
+	color: transparent;
+	background-clip: text;
+	*/
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }

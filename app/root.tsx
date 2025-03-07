@@ -15,13 +15,14 @@ import { type Route } from './+types/root.ts'
 // import appleTouchIconAssetUrl from './assets/favicons/apple-touch-icon.png'
 // import faviconAssetUrl from './assets/favicons/favicon.ico'
 import { GeneralErrorBoundary } from './components/error-boundary.tsx'
+import { LeftPanel } from './components/left-panel.tsx'
 import { EpicProgress } from './components/progress-bar.tsx'
 import { SearchBar } from './components/search-bar.tsx'
 import { useToast } from './components/toaster.tsx'
-import { Button } from './components/ui/button.tsx'
+// import { Button } from './components/ui/button.tsx'
 import { href as iconsHref } from './components/ui/icon.tsx'
 import { EpicToaster } from './components/ui/sonner.tsx'
-import { UserDropdown } from './components/user-dropdown.tsx'
+// import { UserDropdown } from './components/user-dropdown.tsx'
 import {
 	ThemeSwitch,
 	useOptionalTheme,
@@ -29,7 +30,6 @@ import {
 } from './routes/resources+/theme-switch.tsx'
 import tailwindStyleSheetUrl from './styles/tailwind.css?url'
 import { getUserId, logout } from './utils/auth.server.ts'
-import { CanvasAnimation } from './components/canvas.tsx'
 import { ClientHintCheck, getHints } from './utils/client-hints.tsx'
 import { prisma } from './utils/db.server.ts'
 import { getEnv } from './utils/env.server.ts'
@@ -40,13 +40,12 @@ import { useNonce } from './utils/nonce-provider.ts'
 import { type Theme, getTheme } from './utils/theme.server.ts'
 import { makeTimings, time } from './utils/timing.server.ts'
 import { getToast } from './utils/toast.server.ts'
-import { useOptionalUser } from './utils/user.ts'
-import { LeftPanel } from './components/left-panel.tsx'
+// import { useOptionalUser } from './utils/user.ts'
 
 export const links: Route.LinksFunction = () => {
 	return [
 		// Preload svg sprite as a resource to avoid render blocking
-		{ rel: 'preload', href: iconsHref, as: 'image' },
+		// { rel: 'preload', href: iconsHref, as: 'image' },
 		{
 			rel: 'icon',
 			href: '/favicon.ico',
@@ -189,7 +188,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 function App() {
 	const data = useLoaderData<typeof loader>()
-	const user = useOptionalUser()
+	// const user = useOptionalUser()
 	const theme = useTheme()
 	const matches = useMatches()
 	const isOnSearchPage = matches.find((m) => m.id === 'routes/users+/index')
@@ -202,7 +201,7 @@ function App() {
 			getSrc={getImgSrc}
 		>
 			<div className="grid grid-cols-2 min-h-screen">
-				<LeftPanel />
+				<LeftPanel className="dark"/>
 				<div className="flex min-h-screen flex-col justify-between col-[2]">
 					<header className="container py-6">
 						<nav className="flex flex-wrap items-center justify-between gap-4 sm:flex-nowrap md:gap-8">

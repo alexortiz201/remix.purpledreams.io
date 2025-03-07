@@ -77,7 +77,6 @@ const canvasInit = (canvas: HTMLCanvasElement | null) => {
 
   const createDots = () => {
     let dot = undefined
-    console.log({ t: 'Creating', ctxCanvas })
 
     ctxCanvas.clearRect(0, 0, canvas.width, canvas.height);
 
