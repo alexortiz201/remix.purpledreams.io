@@ -37,7 +37,7 @@
 
 		--font-sans: "weblysleek_uilight", sans-serif;
 		--font-mono: "LiberationMonoRegular", monospace;
-/* via-turquois via-green via-orange to-pink */
+
 		/* prefixed with foreground because it should look good on the background */
 		--foreground-destructive: 345 82.7% 40.8%;
 
@@ -110,6 +110,12 @@
 	}
 }
 
+main h2 {
+	text-decoration: underline;
+	text-decoration-color: var(--green);
+	text-decoration-thickness: 2px;
+}
+
 .left-panel {
 	background:
 		linear-gradient(rgba(44, 45, 51, 0.9), rgba(44, 45, 51, 0.9)),
@@ -124,7 +130,8 @@
 
 .a__logo-link {
 	& img {
-		filter: drop-shadow(2px 2px 2px #222);
+		/* filter: drop-shadow(2px 2px 2px #222); */
+		/* filter: drop-shadow(0px -5px 27px #9a5b77); */
 	}
 }
 
@@ -133,9 +140,19 @@
 	color: transparent;
 	background-clip: text;
 	*/
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	/* <'text-decoration-line'>|| <'text-decoration-style'>|| <'text-decoration-color'>|| <'text-decoration-thickness'> */
+	text-decoration: underline;
+	text-decoration-color: var(--green);
+	text-decoration-thickness: 3px;
 }
 
 .color-pink {
 	color: var(--pink)
+}
+
+.social-btn {
+	/* color: var(--green) */
+	&:hover {
+		color: var(--green)
+	}
 }
