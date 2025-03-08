@@ -222,7 +222,7 @@ function App() {
 						</nav>
 					</header>
 
-					<div className="flex flex-1 flex-col">
+					<div className="flex flex-1 flex-col place-content-center">
 						<Outlet />
 					</div>
 
