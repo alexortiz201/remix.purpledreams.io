@@ -133,6 +133,7 @@ main h2 {
 
 .a__logo-link {
 	& img {
+		/* filter: grayscale(25%); */
 		/* filter: drop-shadow(2px 2px 2px #222); */
 		/* filter: drop-shadow(0px -5px 27px #9a5b77); */
 	}
