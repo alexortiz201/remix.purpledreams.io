@@ -7,13 +7,13 @@ const Content = () => {
       <div className="flex max-w-md flex-col items-center text-center xl:order-2 xl:items-center">
         <a
           href={PURPLEDREAMS_LINK}
-          className="a__logo-link w-[150px]"
+          className="a__logo-link w-[60px]"
         >
           <img src="/img/logo04.png" />
         </a>
         <h1
           data-heading
-          className="mt-8 text-4xl text-foreground md:text-5xl xl:mt-4 xl:text-6xl"
+          className="mt-2 text-4xl text-foreground md:text-5xl xl:mt-2 xl:text-6xl"
         >
           <a href={PURPLEDREAMS_LINK} className="border-animation">
             <span className="border-animation font-extralight">purple</span>
