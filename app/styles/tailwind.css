@@ -111,9 +111,12 @@
 }
 
 main h2 {
-	text-decoration: underline;
+	border-bottom: 1px solid var(--green);
+	/* padding-bottom: 16px; */
+	width: fit-content;
+	/* text-decoration: underline;
 	text-decoration-color: var(--green);
-	text-decoration-thickness: 2px;
+	text-decoration-thickness: 2px; */
 }
 
 .left-panel {
