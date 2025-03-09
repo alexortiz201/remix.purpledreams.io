@@ -46,7 +46,7 @@ const Content = () => {
 
 export const LeftPanel = ({ className } : { className?: string } = {}) => {
   return (
-    <div className={`flex min-h-screen flex-col place-content-center col-[1] relative ${className}`}>
+    <div className={`flex min-h-screen flex-col place-content-center relative ${className}`}>
       <div className="flex flex-1 flex-col w-full absolute">
         <Content />
       </div>
