@@ -200,9 +200,9 @@ function App() {
 			optimizerEndpoint="/resources/images"
 			getSrc={getImgSrc}
 		>
-			<div className="grid grid-cols-2 min-h-screen">
-				<LeftPanel className="dark"/>
-				<div className="flex min-h-screen flex-col justify-between col-[2]">
+			<div className="grid grid-cols-3 min-h-screen">
+				<LeftPanel className="dark col-[1]"/>
+				<div className="flex min-h-screen flex-col justify-between col-span-2">
 					<header className="container py-6">
 						<nav className="flex flex-wrap items-center justify-between gap-4 sm:flex-nowrap md:gap-8">
 							<Logo />
