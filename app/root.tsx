@@ -19,10 +19,10 @@ import { LeftPanel } from './components/left-panel.tsx'
 import { EpicProgress } from './components/progress-bar.tsx'
 import { SearchBar } from './components/search-bar.tsx'
 import { useToast } from './components/toaster.tsx'
-// import { Button } from './components/ui/button.tsx'
-import { href as iconsHref } from './components/ui/icon.tsx'
+import { Button } from './components/ui/button.tsx'
+// import { href as iconsHref } from './components/ui/icon.tsx'
 import { EpicToaster } from './components/ui/sonner.tsx'
-// import { UserDropdown } from './components/user-dropdown.tsx'
+import { UserDropdown } from './components/user-dropdown.tsx'
 import {
 	ThemeSwitch,
 	useOptionalTheme,
@@ -40,7 +40,7 @@ import { useNonce } from './utils/nonce-provider.ts'
 import { type Theme, getTheme } from './utils/theme.server.ts'
 import { makeTimings, time } from './utils/timing.server.ts'
 import { getToast } from './utils/toast.server.ts'
-// import { useOptionalUser } from './utils/user.ts'
+import { useOptionalUser } from './utils/user.ts'
 
 export const links: Route.LinksFunction = () => {
 	return [
@@ -188,7 +188,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 function App() {
 	const data = useLoaderData<typeof loader>()
-	// const user = useOptionalUser()
+	const user = useOptionalUser()
 	const theme = useTheme()
 	const matches = useMatches()
 	const isOnSearchPage = matches.find((m) => m.id === 'routes/users+/index')
@@ -209,7 +209,7 @@ function App() {
 							<div className="ml-auto hidden max-w-sm flex-1 sm:block">
 								{searchBar}
 							</div>
-							{/* <div className="flex items-center gap-10">
+							<div className="flex items-center gap-10">
 								{user ? (
 									<UserDropdown />
 								) : (
@@ -217,7 +217,7 @@ function App() {
 										<Link to="/login">Log In</Link>
 									</Button>
 								)}
-							</div> */}
+							</div>
 							<div className="block w-full sm:hidden">{searchBar}</div>
 						</nav>
 					</header>

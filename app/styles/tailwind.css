@@ -29,8 +29,8 @@
 		--yellow: #f89406;
 		--aqua: #7FDBFF;
 
-		--purple: #aa1fd9;
-		--turquois: #00FFE0;
+		--purple: #3b1f5c;
+		--turquois: #33ccba;
 		--green: #ABC65D;
 		--orange: #DFB626;
 		--pink: #fe57a1;
@@ -119,23 +119,20 @@ main h2 {
 	text-decoration-thickness: 2px; */
 }
 
+/*
+	/img/home.png
+
+*/
 .left-panel {
 	background:
 		linear-gradient(rgba(44, 45, 51, 0.9), rgba(44, 45, 51, 0.9)),
-		url('/img/home.png'); /* /img/home.png */
+		url('/img/unsplash-image-1.jpg');
 	background-size: cover;
-	/*
-	background-position: 50% 4%;
-	background-size: 113% 208%;
-	background-repeat: no-repeat;
-	*/
 }
 
 .a__logo-link {
 	& img {
-		/* filter: grayscale(25%); */
-		/* filter: drop-shadow(2px 2px 2px #222); */
-		/* filter: drop-shadow(0px -5px 27px #9a5b77); */
+		filter: grayscale(25%);
 	}
 }
 
@@ -157,6 +154,8 @@ main h2 {
 .social-btn {
 	/* color: var(--green) */
 	&:hover {
-		color: var(--green)
+		color: var(--turquois);
+		transition-duration: .3s;
+		transition-property: color;
 	}
 }
