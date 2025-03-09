@@ -1,4 +1,5 @@
 import { CanvasAnimation } from "./canvas"
+import { Icon } from "./ui/icon"
 
 const PURPLEDREAMS_LINK = '/'
 const Content = () => {
@@ -23,10 +24,18 @@ const Content = () => {
         <div className="mt-6 text-xl/7 text-muted-foreground xl:mt-8 xl:text-xl/6 xl:leading-10 flex justify-between">
           <ul className="list-none flex gap-2">
             <li className="flex">
-              <a className="social-btn" href="https://linkedin.com/in/alexortiz201" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a className="social-btn" href="https://linkedin.com/in/alexortiz201" target="_blank" rel="noopener noreferrer">
+                <Icon className="size-[1.5em]" name="linkedin-logo">
+                  <span className="sr-only">LinkedIn</span>
+                </Icon>
+              </a>
             </li>
             <li className="flex">
-              <a className="social-btn" href="https://github.com/alexortiz201" target="_blank" rel="noopener noreferrer">Github</a>
+              <a className="social-btn" href="https://github.com/alexortiz201" target="_blank" rel="noopener noreferrer">
+                <Icon className="size-[1.5em]" name="github-logo">
+                  <span className="sr-only">Github</span>
+                </Icon>
+              </a>
             </li>
           </ul>
         </div>
