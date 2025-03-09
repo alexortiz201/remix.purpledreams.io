@@ -154,7 +154,7 @@ main h2 {
 .social-btn {
 	/* color: var(--green) */
 	&:hover {
-		color: var(--turquois);
+		color: var(--green);
 		transition-duration: .3s;
 		transition-property: color;
 	}
