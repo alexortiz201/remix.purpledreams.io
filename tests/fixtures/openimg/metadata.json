@@ -14,5 +14,13 @@
   "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/user/kody-png-w-832-h-832-fit-base.avif": {
     "size": 35671,
     "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/kody-notes/cute-koala-png-w-512-h-512-fit-base.avif": {
+    "size": 11983,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/kody-notes/koala-eating-png-w-512-h-512-fit-base.avif": {
+    "size": 23008,
+    "contentType": "image/avif"
   }
 }

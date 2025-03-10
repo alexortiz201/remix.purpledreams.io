@@ -13,6 +13,77 @@ async function seed() {
 	console.log('🌱 Seeding...')
 	console.time(`🌱 Database has been seeded`)
 
+	console.time('🔑 Created permissions...')
+	const entities = ['user', 'note']
+	const actions = ['create', 'read', 'update', 'delete']
+	const accesses = ['own', 'site', 'any'] as const
+
+	let permissionsToCreate = []
+	for (const entity of entities) {
+		for (const action of actions) {
+			for (const access of accesses) {
+				permissionsToCreate.push({ entity, action, access })
+			}
+		}
+	}
+	await prisma.permission.createMany({ data: permissionsToCreate })
+	console.timeEnd('🔑 Created permissions...')
+
+
+	const defaultSite = await prisma.site.create({
+		select: { id: true },
+		data: {
+			name: 'purpledreams',
+			description: 'PurpleDreams.io'
+		},
+	})
+
+	console.time('👑 Created roles...')
+	await prisma.role.create({
+		data: {
+			name: 'super-admin',
+			permissions: {
+				connect: await prisma.permission.findMany({
+					select: { id: true },
+					where: { access: 'any' },
+				}),
+			},
+			site: {
+				connect: { id: defaultSite.id }
+			}
+		},
+	})
+	await prisma.role.create({
+		data: {
+			name: 'admin',
+			permissions: {
+				connect: await prisma.permission.findMany({
+					select: { id: true },
+					where: { access: 'site' },
+				}),
+			},
+			site: {
+				connect: { id: defaultSite.id }
+			}
+		},
+	})
+	await prisma.role.create({
+		data: {
+			name: 'user',
+			permissions: {
+				connect: await prisma.permission.findMany({
+					select: { id: true },
+					where: { access: 'own' },
+				}),
+			},
+			site: {
+				connect: { id: defaultSite.id }
+			}
+		},
+	})
+
+	console.timeEnd('👑 Created roles...')
+
 	const totalUsers = 5
 	console.time(`👤 Created ${totalUsers} users...`)
 	const noteImages = await getNoteImages()
@@ -26,6 +97,7 @@ async function seed() {
 				...userData,
 				password: { create: createPassword(userData.username) },
 				roles: { connect: { name: 'user' } },
+				site: { connect: { name: 'purpledreams' } },
 			},
 		})
 
@@ -121,7 +193,8 @@ async function seed() {
 					providerId: String(githubUser.profile.id),
 				},
 			},
-			roles: { connect: [{ name: 'admin' }, { name: 'user' }] },
+			roles: { connect: [{ name: 'super-admin' }, { name: 'admin' }, { name: 'user' }] },
+			site: { connect: { name: 'purpledreams' } },
 		},
 	})
 
@@ -243,7 +316,6 @@ async function seed() {
 	}
 
 	console.timeEnd(`🐨 Created admin user "alex"`)
-
 	console.timeEnd(`🌱 Database has been seeded`)
 }
 
