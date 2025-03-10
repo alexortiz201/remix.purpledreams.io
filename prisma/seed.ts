@@ -71,10 +71,10 @@ async function seed() {
 	}
 	console.timeEnd(`👤 Created ${totalUsers} users...`)
 
-	console.time(`🐨 Created admin user "kody"`)
+	console.time(`🐨 Created admin user "alex"`)
 
-	const kodyImages = {
-		kodyUser: { objectKey: 'user/kody.png' },
+	const alexImages = {
+		alexUser: { objectKey: 'user/kody.png' },
 		cuteKoala: {
 			altText: 'an adorable koala cartoon illustration',
 			objectKey: 'kody-notes/cute-koala.png',
@@ -108,13 +108,13 @@ async function seed() {
 
 	const githubUser = await insertGitHubUser(MOCK_CODE_GITHUB)
 
-	const kody = await prisma.user.create({
+	const alex = await prisma.user.create({
 		select: { id: true },
 		data: {
-			email: 'kody@kcd.dev',
-			username: 'kody',
-			name: 'Kody',
-			password: { create: createPassword('kodylovesyou') },
+			email: 'alex@purpledreams.io',
+			username: 'Alex',
+			name: 'Alex',
+			password: { create: createPassword('alexlovesyou') },
 			connections: {
 				create: {
 					providerName: 'github',
@@ -127,26 +127,26 @@ async function seed() {
 
 	await prisma.userImage.create({
 		data: {
-			userId: kody.id,
-			objectKey: kodyImages.kodyUser.objectKey,
+			userId: alex.id,
+			objectKey: alexImages.alexUser.objectKey,
 		},
 	})
 
 	// Create Kody's notes
-	const kodyNotes = [
+	const alexNotes = [
 		{
 			id: 'd27a197e',
 			title: 'Basic Koala Facts',
 			content:
 				'Koalas are found in the eucalyptus forests of eastern Australia. They have grey fur with a cream-coloured chest, and strong, clawed feet, perfect for living in the branches of trees!',
-			images: [kodyImages.cuteKoala, kodyImages.koalaEating],
+			images: [alexImages.cuteKoala, alexImages.koalaEating],
 		},
 		{
 			id: '414f0c09',
 			title: 'Koalas like to cuddle',
 			content:
 				'Cuddly critters, koalas measure about 60cm to 85cm long, and weigh about 14kg.',
-			images: [kodyImages.koalaCuddle],
+			images: [alexImages.koalaCuddle],
 		},
 		{
 			id: '260366b1',
@@ -160,7 +160,7 @@ async function seed() {
 			title: 'Snowboarding Adventure',
 			content:
 				"Today was an epic day on the slopes! Shredded fresh powder with my friends, caught some sick air, and even attempted a backflip. Can't wait for the next snowy adventure!",
-			images: [kodyImages.mountain],
+			images: [alexImages.mountain],
 		},
 		{
 			id: '9f4308be',
@@ -174,14 +174,14 @@ async function seed() {
 			title: 'Coding Dilemma',
 			content:
 				"Stuck on a bug in my latest coding project. Need to figure out why my function isn't returning the expected output. Time to dig deep, debug, and conquer this challenge!",
-			images: [kodyImages.koalaCoder],
+			images: [alexImages.koalaCoder],
 		},
 		{
 			id: '16d4912a',
 			title: 'Coding Mentorship',
 			content:
 				"Had a fantastic coding mentoring session today with Sarah. Helped her understand the concept of recursion, and she made great progress. It's incredibly fulfilling to help others improve their coding skills.",
-			images: [kodyImages.koalaMentor],
+			images: [alexImages.koalaMentor],
 		},
 		{
 			id: '3199199e',
@@ -195,14 +195,14 @@ async function seed() {
 			title: 'Skiing Adventure',
 			content:
 				'Spent the day hitting the slopes on my skis. The fresh powder made for some incredible runs and breathtaking views. Skiing down the mountain at top speed is an adrenaline rush like no other!',
-			images: [kodyImages.mountain],
+			images: [alexImages.mountain],
 		},
 		{
 			id: 'f375a804',
 			title: 'Code Jam Success',
 			content:
 				'Participated in a coding competition today and secured the first place! The adrenaline, the challenging problems, and the satisfaction of finding optimal solutions—it was an amazing experience. Feeling proud and motivated to keep pushing my coding skills further!',
-			images: [kodyImages.koalaCoder],
+			images: [alexImages.koalaCoder],
 		},
 		{
 			id: '562c541b',
@@ -216,18 +216,18 @@ async function seed() {
 			title: 'Game day',
 			content:
 				"Just got back from the most amazing game. I've been playing soccer for a long time, but I've not once scored a goal. Well, today all that changed! I finally scored my first ever goal.\n\nI'm in an indoor league, and my team's not the best, but we're pretty good and I have fun, that's all that really matters. Anyway, I found myself at the other end of the field with the ball. It was just me and the goalie. I normally just kick the ball and hope it goes in, but the ball was already rolling toward the goal. The goalie was about to get the ball, so I had to charge. I managed to get possession of the ball just before the goalie got it. I brought it around the goalie and had a perfect shot. I screamed so loud in excitement. After all these years playing, I finally scored a goal!\n\nI know it's not a lot for most folks, but it meant a lot to me. We did end up winning the game by one. It makes me feel great that I had a part to play in that.\n\nIn this team, I'm the captain. I'm constantly cheering my team on. Even after getting injured, I continued to come and watch from the side-lines. I enjoy yelling (encouragingly) at my team mates and helping them be the best they can. I'm definitely not the best player by a long stretch. But I really enjoy the game. It's a great way to get exercise and have good social interactions once a week.\n\nThat said, it can be hard to keep people coming and paying dues and stuff. If people don't show up it can be really hard to find subs. I have a list of people I can text, but sometimes I can't find anyone.\n\nBut yeah, today was awesome. I felt like more than just a player that gets in the way of the opposition, but an actual asset to the team. Really great feeling.\n\nAnyway, I'm rambling at this point and really this is just so we can have a note that's pretty long to test things out. I think it's long enough now... Cheers!",
-			images: [kodyImages.koalaSoccer],
+			images: [alexImages.koalaSoccer],
 		},
 	]
 
-	for (const noteData of kodyNotes) {
+	for (const noteData of alexNotes) {
 		const note = await prisma.note.create({
 			select: { id: true },
 			data: {
 				id: noteData.id,
 				title: noteData.title,
 				content: noteData.content,
-				ownerId: kody.id,
+				ownerId: alex.id,
 			},
 		})
 
@@ -242,7 +242,7 @@ async function seed() {
 		}
 	}
 
-	console.timeEnd(`🐨 Created admin user "kody"`)
+	console.timeEnd(`🐨 Created admin user "alex"`)
 
 	console.timeEnd(`🌱 Database has been seeded`)
 }
