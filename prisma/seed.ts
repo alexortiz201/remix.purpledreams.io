@@ -112,7 +112,7 @@ async function seed() {
 		select: { id: true },
 		data: {
 			email: 'alex@purpledreams.io',
-			username: 'Alex',
+			username: 'alex',
 			name: 'Alex',
 			password: { create: createPassword('alexlovesyou') },
 			connections: {
