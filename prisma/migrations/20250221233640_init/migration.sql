@@ -120,19 +120,44 @@ CREATE TABLE "Passkey" (
 );
 
 -- CreateTable
-CREATE TABLE "_PermissionToRole" (
-    "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL,
-    CONSTRAINT "_PermissionToRole_A_fkey" FOREIGN KEY ("A") REFERENCES "Permission" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "_PermissionToRole_B_fkey" FOREIGN KEY ("B") REFERENCES "Role" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE "Site" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "name" TEXT NOT NULL,
+    "description" TEXT,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
 );
 
 -- CreateTable
-CREATE TABLE "_RoleToUser" (
+CREATE TABLE "_RolePermissions" (
     "A" TEXT NOT NULL,
     "B" TEXT NOT NULL,
-    CONSTRAINT "_RoleToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "Role" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "_RoleToUser_B_fkey" FOREIGN KEY ("B") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT "_RolePermissions_A_fkey" FOREIGN KEY ("A") REFERENCES "Permission" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "_RolePermissions_B_fkey" FOREIGN KEY ("B") REFERENCES "Role" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "_UserRoles" (
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL,
+    CONSTRAINT "_UserRoles_A_fkey" FOREIGN KEY ("A") REFERENCES "Role" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "_UserRoles_B_fkey" FOREIGN KEY ("B") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "_RoleSites" (
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL,
+    CONSTRAINT "_RoleSites_A_fkey" FOREIGN KEY ("A") REFERENCES "Role" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "_RoleSites_B_fkey" FOREIGN KEY ("B") REFERENCES "Site" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "_UserSites" (
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL,
+    CONSTRAINT "_UserSites_A_fkey" FOREIGN KEY ("A") REFERENCES "Site" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "_UserSites_B_fkey" FOREIGN KEY ("B") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateIndex
@@ -175,16 +200,23 @@ CREATE UNIQUE INDEX "Connection_providerName_providerId_key" ON "Connection"("pr
 CREATE INDEX "Passkey_userId_idx" ON "Passkey"("userId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "_PermissionToRole_AB_unique" ON "_PermissionToRole"("A", "B");
+CREATE UNIQUE INDEX "Site_name_key" ON "Site"("name");
 
 -- CreateIndex
-CREATE INDEX "_PermissionToRole_B_index" ON "_PermissionToRole"("B");
+CREATE UNIQUE INDEX "_RolePermissions_AB_unique" ON "_RolePermissions"("A", "B");
+CREATE INDEX "_RolePermissions_B_index" ON "_RolePermissions"("B");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "_RoleToUser_AB_unique" ON "_RoleToUser"("A", "B");
+CREATE UNIQUE INDEX "_UserRoles_AB_unique" ON "_UserRoles"("A", "B");
+CREATE INDEX "_UserRoles_B_index" ON "_UserRoles"("B");
 
 -- CreateIndex
-CREATE INDEX "_RoleToUser_B_index" ON "_RoleToUser"("B");
+CREATE UNIQUE INDEX "_RoleSites_AB_unique" ON "_RoleSites"("A", "B");
+CREATE INDEX "_RoleSites_B_index" ON "_RoleSites"("B");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_UserSites_AB_unique" ON "_UserSites"("A", "B");
+CREATE INDEX "_UserSites_B_index" ON "_UserSites"("B");
 
 --------------------------------- Manual Seeding --------------------------
 -- Hey there, Kent here! This is how you can reliably seed your database with
@@ -237,171 +269,173 @@ CREATE INDEX "_RoleToUser_B_index" ON "_RoleToUser"("B");
 -- })
 -- console.timeEnd('👑 Created roles...')
 
-INSERT INTO Permission VALUES('cm83ts0sq00009nlcq3nvj4oa','create','user','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq00019nlcbfbtmhzp','create','user','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq00029nlcz4povtg8','create','user','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq00039nlcibuza0bn','read','user','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq00049nlcueef8qpj','read','user','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq00059nlc9ihccyga','read','user','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq00069nlcggxsdlhk','update','user','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq00079nlci8jj1l7f','update','user','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq00089nlc52zzquvs','update','user','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq00099nlcupz7q76z','delete','user','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000a9nlc94tz1eid','delete','user','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000b9nlcmon7uzjy','delete','user','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000c9nlceybmoxe8','create','note','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000d9nlcqvoepxth','create','note','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000e9nlcc35clta6','create','note','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000f9nlcng9m8mgj','read','note','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000g9nlczndp1npa','read','note','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000h9nlc5eqbc0v1','read','note','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000i9nlcy3z7qxnb','update','note','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000j9nlccrv77q3n','update','note','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000k9nlc15pm7fko','update','note','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000l9nlcdmr67fji','delete','note','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000m9nlc9s3bcntv','delete','note','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000n9nlcau2f9ld5','delete','note','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000o9nlcjolg7xoc','create','site','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000p9nlc5jfj1wvo','create','site','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sq000q9nlcbd99mbcl','create','site','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr000r9nlcuk2axpaw','read','site','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr000s9nlc64weav9b','read','site','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr000t9nlcwvrd1uer','read','site','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr000u9nlcn9tbwc1f','update','site','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr000v9nlc6lk8vjt6','update','site','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr000w9nlcrtw9j6n2','update','site','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr000x9nlcxosbgdiu','delete','site','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr000y9nlcgmjyaspe','delete','site','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr000z9nlcvs36dpyk','delete','site','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr00109nlcjgj1dtzv','create','role','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr00119nlcy3eep8l1','create','role','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr00129nlcde9r49j2','create','role','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr00139nlc8y5v6gc9','read','role','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr00149nlc0c27l2cp','read','role','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr00159nlcuy185lso','read','role','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr00169nlcwggom0s8','update','role','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr00179nlckmemzgrq','update','role','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr00189nlc6t77ekhk','update','role','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr00199nlcqa3ews9f','delete','role','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001a9nlcwa6z1bys','delete','role','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001b9nlcfvrmu9ik','delete','role','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001c9nlcbcvcltmo','create','permission','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001d9nlct83y3v6b','create','permission','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001e9nlcl4m2hdui','create','permission','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001f9nlc9cyuikrr','read','permission','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001g9nlcqdsaf4d9','read','permission','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001h9nlcpoq5288b','read','permission','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001i9nlc2cduhfkf','update','permission','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001j9nlcre4bgoas','update','permission','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001k9nlcpcsvqbsi','update','permission','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001l9nlcsn7tygsg','delete','permission','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001m9nlcpm7qnyei','delete','permission','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001n9nlcxapr318x','delete','permission','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001o9nlcw6nbspen','create','connection','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001p9nlcabpjvdz6','create','connection','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001q9nlca0eygveo','create','connection','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001r9nlcpwndonn5','read','connection','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001s9nlcj8n0l557','read','connection','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001t9nlcr51bfzz4','read','connection','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001u9nlcew77mrsn','update','connection','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001v9nlcch1evzju','update','connection','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001w9nlcvc2foh7d','update','connection','any','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001x9nlcv76ormtb','delete','connection','own','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001y9nlc3wjsclto','delete','connection','site','',1741657283594,1741657283594);
-INSERT INTO Permission VALUES('cm83ts0sr001z9nlcb3d37mw2','delete','connection','any','',1741657283594,1741657283594);
+INSERT INTO Site VALUES('cm83vfanj00209nszj2wcfi28','purpledreams','PurpleDreams.io',1741660049072,1741660049072);
 
-INSERT INTO Role VALUES('cm83ts0sx00219nlcnbg9e9ke','super-admin','',1741657283601,1741657283601);
-INSERT INTO Role VALUES('cm83ts0sy00229nlcji3k5m36','admin','',1741657283603,1741657283603);
-INSERT INTO Role VALUES('cm83ts0t000239nlc495ae9uj','user','',1741657283604,1741657283604);
+INSERT INTO Permission VALUES('cm83vfane00009nszybczy0t1','create','user','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00019nszdykqhncn','create','user','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00029nszunzehh89','create','user','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00039nszvtdd8jv7','read','user','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00049nsz4324533e','read','user','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00059nszlj1jb70m','read','user','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00069nszzowfy1qy','update','user','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00079nsz5c881d9m','update','user','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00089nszro9arnqk','update','user','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00099nsz7jmdlf9o','delete','user','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000a9nszkux4qy2t','delete','user','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000b9nszvwp9qzz5','delete','user','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000c9nszsrvc2xdm','create','note','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000d9nszphevc4p3','create','note','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000e9nszsmaznlf3','create','note','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000f9nsz6s6i1trj','read','note','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000g9nszb6rtzdhj','read','note','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000h9nszoehewoqv','read','note','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000i9nszp1mu3ee4','update','note','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000j9nszedo93kk0','update','note','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000k9nsz39hvebmj','update','note','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000l9nszw2fa1b04','delete','note','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000m9nszd6rn225v','delete','note','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000n9nszaf5g44c7','delete','note','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000o9nszdf6lzc1l','create','site','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000p9nsz8h4lbua1','create','site','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000q9nszuvx1rx7q','create','site','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000r9nszg01pu2og','read','site','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000s9nszxajis7cu','read','site','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000t9nszlb6g170b','read','site','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000u9nsz8g8u0mpa','update','site','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000v9nszd2z23br5','update','site','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000w9nszes14bdrq','update','site','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000x9nszhffenynq','delete','site','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000y9nszmiz9oobd','delete','site','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane000z9nsz1undl1tp','delete','site','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00109nszo2f0r62n','create','role','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00119nszlshrv13k','create','role','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00129nszjrishwz3','create','role','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00139nsz90qvk56t','read','role','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00149nsz65brgr02','read','role','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00159nsz8zn0m9t6','read','role','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00169nsz6bylp4x2','update','role','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00179nsz1a191sqh','update','role','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00189nsz1myg7xp8','update','role','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane00199nszytzpebfa','delete','role','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane001a9nszstqy1y8h','delete','role','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane001b9nszns5ibgpg','delete','role','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane001c9nszrmjm250b','create','permission','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane001d9nszymjn0niz','create','permission','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane001e9nszgnhol6gp','create','permission','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane001f9nszsy11xwqp','read','permission','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane001g9nszn6nd1kya','read','permission','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane001h9nszjaluqhvv','read','permission','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane001i9nszd77ij24d','update','permission','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane001j9nsz76xeavhu','update','permission','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane001k9nszpz55ttfn','update','permission','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane001l9nsztmkhu9fg','delete','permission','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfane001m9nszx645xrnk','delete','permission','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfanf001n9nsz3kykav2h','delete','permission','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfanf001o9nsz0c76sr5e','create','connection','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfanf001p9nszpa0mu8ym','create','connection','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfanf001q9nszrfcxa0ck','create','connection','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfanf001r9nszbznu90qy','read','connection','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfanf001s9nsz3zctmngz','read','connection','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfanf001t9nszg5ulloya','read','connection','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfanf001u9nszv3lh5ddy','update','connection','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfanf001v9nsz9xor8eo2','update','connection','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfanf001w9nsz3w18e6mu','update','connection','any','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfanf001x9nszh39lqml3','delete','connection','own','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfanf001y9nszd8o71cwi','delete','connection','site','',1741660049066,1741660049066);
+INSERT INTO Permission VALUES('cm83vfanf001z9nszgjhes867','delete','connection','any','',1741660049066,1741660049066);
 
-INSERT INTO _RolePermissions VALUES('cm83ts0sq00029nlcz4povtg8','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq00059nlc9ihccyga','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq00089nlc52zzquvs','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000b9nlcmon7uzjy','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000e9nlcc35clta6','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000h9nlc5eqbc0v1','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000k9nlc15pm7fko','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000n9nlcau2f9ld5','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000q9nlcbd99mbcl','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr000t9nlcwvrd1uer','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr000w9nlcrtw9j6n2','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr000z9nlcvs36dpyk','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr00129nlcde9r49j2','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr00159nlcuy185lso','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr00189nlc6t77ekhk','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001b9nlcfvrmu9ik','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001e9nlcl4m2hdui','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001h9nlcpoq5288b','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001k9nlcpcsvqbsi','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001n9nlcxapr318x','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001q9nlca0eygveo','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001t9nlcr51bfzz4','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001w9nlcvc2foh7d','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001z9nlcb3d37mw2','cm83ts0sx00219nlcnbg9e9ke');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq00019nlcbfbtmhzp','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq00049nlcueef8qpj','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq00079nlci8jj1l7f','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000a9nlc94tz1eid','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000d9nlcqvoepxth','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000g9nlczndp1npa','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000j9nlccrv77q3n','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000m9nlc9s3bcntv','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000p9nlc5jfj1wvo','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr000s9nlc64weav9b','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr000v9nlc6lk8vjt6','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr000y9nlcgmjyaspe','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr00119nlcy3eep8l1','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr00149nlc0c27l2cp','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr00179nlckmemzgrq','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001a9nlcwa6z1bys','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001d9nlct83y3v6b','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001g9nlcqdsaf4d9','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001j9nlcre4bgoas','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001m9nlcpm7qnyei','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001p9nlcabpjvdz6','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001s9nlcj8n0l557','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001v9nlcch1evzju','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001y9nlc3wjsclto','cm83ts0sy00229nlcji3k5m36');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq00009nlcq3nvj4oa','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq00039nlcibuza0bn','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq00069nlcggxsdlhk','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq00099nlcupz7q76z','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000c9nlceybmoxe8','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000f9nlcng9m8mgj','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000i9nlcy3z7qxnb','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000l9nlcdmr67fji','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sq000o9nlcjolg7xoc','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr000r9nlcuk2axpaw','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr000u9nlcn9tbwc1f','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr000x9nlcxosbgdiu','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr00109nlcjgj1dtzv','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr00139nlc8y5v6gc9','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr00169nlcwggom0s8','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr00199nlcqa3ews9f','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001c9nlcbcvcltmo','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001f9nlc9cyuikrr','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001i9nlc2cduhfkf','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001l9nlcsn7tygsg','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001o9nlcw6nbspen','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001r9nlcpwndonn5','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001u9nlcew77mrsn','cm83ts0t000239nlc495ae9uj');
-INSERT INTO _RolePermissions VALUES('cm83ts0sr001x9nlcv76ormtb','cm83ts0t000239nlc495ae9uj');
+INSERT INTO Role VALUES('cm83vfanl00219nsz2s95csi8','super-admin','',1741660049074,1741660049074);
+INSERT INTO Role VALUES('cm83vfano00229nsz9uu6bvqt','admin','',1741660049076,1741660049076);
+INSERT INTO Role VALUES('cm83vfanq00239nsz2ipb6ozn','user','',1741660049079,1741660049079);
 
-INSERT INTO _UserRoles VALUES('cm83ts0t000239nlc495ae9uj','cm83ts0vf00249nlc8i1jhtya');
-INSERT INTO _UserRoles VALUES('cm83ts0t000239nlc495ae9uj','cm83ts0xc002j9nlchxbqqwvc');
-INSERT INTO _UserRoles VALUES('cm83ts0t000239nlc495ae9uj','cm83ts0z800309nlcyynsc1hg');
-INSERT INTO _UserRoles VALUES('cm83ts0t000239nlc495ae9uj','cm83ts115003l9nlce06rdvyo');
-INSERT INTO _UserRoles VALUES('cm83ts0t000239nlc495ae9uj','cm83ts131003u9nlcloky3td7');
-INSERT INTO _UserRoles VALUES('cm83ts0sx00219nlcnbg9e9ke','cm83ts151004h9nlckw16m7u5');
-INSERT INTO _UserRoles VALUES('cm83ts0sy00229nlcji3k5m36','cm83ts151004h9nlckw16m7u5');
-INSERT INTO _UserRoles VALUES('cm83ts0t000239nlc495ae9uj','cm83ts151004h9nlckw16m7u5');
+INSERT INTO _RolePermissions VALUES('cm83vfane00029nszunzehh89','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane00059nszlj1jb70m','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane00089nszro9arnqk','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane000b9nszvwp9qzz5','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane000e9nszsmaznlf3','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane000h9nszoehewoqv','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane000k9nsz39hvebmj','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane000n9nszaf5g44c7','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane000q9nszuvx1rx7q','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane000t9nszlb6g170b','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane000w9nszes14bdrq','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane000z9nsz1undl1tp','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane00129nszjrishwz3','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane00159nsz8zn0m9t6','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane00189nsz1myg7xp8','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane001b9nszns5ibgpg','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane001e9nszgnhol6gp','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane001h9nszjaluqhvv','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane001k9nszpz55ttfn','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfanf001n9nsz3kykav2h','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfanf001q9nszrfcxa0ck','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfanf001t9nszg5ulloya','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfanf001w9nsz3w18e6mu','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfanf001z9nszgjhes867','cm83vfanl00219nsz2s95csi8');
+INSERT INTO _RolePermissions VALUES('cm83vfane00019nszdykqhncn','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane00049nsz4324533e','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane00079nsz5c881d9m','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane000a9nszkux4qy2t','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane000d9nszphevc4p3','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane000g9nszb6rtzdhj','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane000j9nszedo93kk0','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane000m9nszd6rn225v','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane000p9nsz8h4lbua1','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane000s9nszxajis7cu','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane000v9nszd2z23br5','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane000y9nszmiz9oobd','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane00119nszlshrv13k','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane00149nsz65brgr02','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane00179nsz1a191sqh','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane001a9nszstqy1y8h','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane001d9nszymjn0niz','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane001g9nszn6nd1kya','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane001j9nsz76xeavhu','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane001m9nszx645xrnk','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfanf001p9nszpa0mu8ym','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfanf001s9nsz3zctmngz','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfanf001v9nsz9xor8eo2','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfanf001y9nszd8o71cwi','cm83vfano00229nsz9uu6bvqt');
+INSERT INTO _RolePermissions VALUES('cm83vfane00009nszybczy0t1','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane00039nszvtdd8jv7','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane00069nszzowfy1qy','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane00099nsz7jmdlf9o','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane000c9nszsrvc2xdm','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane000f9nsz6s6i1trj','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane000i9nszp1mu3ee4','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane000l9nszw2fa1b04','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane000o9nszdf6lzc1l','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane000r9nszg01pu2og','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane000u9nsz8g8u0mpa','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane000x9nszhffenynq','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane00109nszo2f0r62n','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane00139nsz90qvk56t','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane00169nsz6bylp4x2','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane00199nszytzpebfa','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane001c9nszrmjm250b','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane001f9nszsy11xwqp','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane001i9nszd77ij24d','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfane001l9nsztmkhu9fg','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfanf001o9nsz0c76sr5e','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfanf001r9nszbznu90qy','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfanf001u9nszv3lh5ddy','cm83vfanq00239nsz2ipb6ozn');
+INSERT INTO _RolePermissions VALUES('cm83vfanf001x9nszh39lqml3','cm83vfanq00239nsz2ipb6ozn');
 
-INSERT INTO _RoleSites VALUES('cm83ts0sy00229nlcji3k5m36','cm83ts0sv00209nlcvraxy52k');
-INSERT INTO _RoleSites VALUES('cm83ts0t000239nlc495ae9uj','cm83ts0sv00209nlcvraxy52k');
+INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfaq200249nszbky41df5');
+INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfas0002l9nszq8uclo39');
+INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfatx00369nszkifgatwc');
+INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfavv003t9nszmac2pygc');
+INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfaxq00469nszqeafj6df');
+INSERT INTO _UserRoles VALUES('cm83vfanl00219nsz2s95csi8','cm83vfazq004x9nszoxwrgjpd');
+INSERT INTO _UserRoles VALUES('cm83vfano00229nsz9uu6bvqt','cm83vfazq004x9nszoxwrgjpd');
+INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfazq004x9nszoxwrgjpd');
 
-INSERT INTO _UserSites VALUES('cm83ts0sv00209nlcvraxy52k','cm83ts0vf00249nlc8i1jhtya');
-INSERT INTO _UserSites VALUES('cm83ts0sv00209nlcvraxy52k','cm83ts0xc002j9nlchxbqqwvc');
-INSERT INTO _UserSites VALUES('cm83ts0sv00209nlcvraxy52k','cm83ts0z800309nlcyynsc1hg');
-INSERT INTO _UserSites VALUES('cm83ts0sv00209nlcvraxy52k','cm83ts115003l9nlce06rdvyo');
-INSERT INTO _UserSites VALUES('cm83ts0sv00209nlcvraxy52k','cm83ts131003u9nlcloky3td7');
-INSERT INTO _UserSites VALUES('cm83ts0sv00209nlcvraxy52k','cm83ts151004h9nlckw16m7u5');
+INSERT INTO _RoleSites VALUES('cm83vfano00229nsz9uu6bvqt','cm83vfanj00209nszj2wcfi28');
+INSERT INTO _RoleSites VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfanj00209nszj2wcfi28');
+
+INSERT INTO _UserSites VALUES('cm83vfanj00209nszj2wcfi28','cm83vfaq200249nszbky41df5');
+INSERT INTO _UserSites VALUES('cm83vfanj00209nszj2wcfi28','cm83vfas0002l9nszq8uclo39');
+INSERT INTO _UserSites VALUES('cm83vfanj00209nszj2wcfi28','cm83vfatx00369nszkifgatwc');
+INSERT INTO _UserSites VALUES('cm83vfanj00209nszj2wcfi28','cm83vfavv003t9nszmac2pygc');
+INSERT INTO _UserSites VALUES('cm83vfanj00209nszj2wcfi28','cm83vfaxq00469nszqeafj6df');
+INSERT INTO _UserSites VALUES('cm83vfanj00209nszj2wcfi28','cm83vfazq004x9nszoxwrgjpd');
