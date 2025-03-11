@@ -23,13 +23,12 @@ model User {
   image       UserImage?
   password    Password?
   notes       Note[]
-  roles       Role[]
+  roles       Role[]       @relation("UserRoles")
   sessions    Session[]
   connections Connection[]
   passkey     Passkey[]
 
-  site   Site?   @relation(fields: [siteId], references: [id], onDelete: SetNull, onUpdate: Cascade)
-  siteId String?
+  sites Site[] @relation("UserSites")
 }
 
 model Note {
@@ -109,7 +108,7 @@ model Permission {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  roles Role[]
+  roles Role[] @relation("RolePermissions")
 
   @@unique([action, entity, access])
 }
@@ -122,13 +121,10 @@ model Role {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  users       User[]
-  permissions Permission[]
+  users       User[]       @relation("UserRoles")
+  permissions Permission[] @relation("RolePermissions")
 
-  site   Site   @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  siteId String
-
-  @@unique([siteId, name])
+  sites Site[] @relation("RoleSites")
 }
 
 model Verification {
@@ -201,6 +197,6 @@ model Site {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  users User[]
-  roles Role[]
+  users User[] @relation("UserSites")
+  roles Role[] @relation("RoleSites")
 }

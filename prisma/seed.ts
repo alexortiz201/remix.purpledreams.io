@@ -14,7 +14,7 @@ async function seed() {
 	console.time(`🌱 Database has been seeded`)
 
 	console.time('🔑 Created permissions...')
-	const entities = ['user', 'note']
+	const entities = ['user', 'note', 'site', 'role', 'permission', 'connection'];
 	const actions = ['create', 'read', 'update', 'delete']
 	const accesses = ['own', 'site', 'any'] as const
 
@@ -28,7 +28,6 @@ async function seed() {
 	}
 	await prisma.permission.createMany({ data: permissionsToCreate })
 	console.timeEnd('🔑 Created permissions...')
-
 
 	const defaultSite = await prisma.site.create({
 		select: { id: true },
@@ -47,9 +46,6 @@ async function seed() {
 					select: { id: true },
 					where: { access: 'any' },
 				}),
-			},
-			site: {
-				connect: { id: defaultSite.id }
 			}
 		},
 	})
@@ -62,7 +58,7 @@ async function seed() {
 					where: { access: 'site' },
 				}),
 			},
-			site: {
+			sites: {
 				connect: { id: defaultSite.id }
 			}
 		},
@@ -76,7 +72,7 @@ async function seed() {
 					where: { access: 'own' },
 				}),
 			},
-			site: {
+			sites: {
 				connect: { id: defaultSite.id }
 			}
 		},
@@ -97,7 +93,7 @@ async function seed() {
 				...userData,
 				password: { create: createPassword(userData.username) },
 				roles: { connect: { name: 'user' } },
-				site: { connect: { name: 'purpledreams' } },
+				sites: { connect: { name: 'purpledreams' } },
 			},
 		})
 
@@ -194,7 +190,7 @@ async function seed() {
 				},
 			},
 			roles: { connect: [{ name: 'super-admin' }, { name: 'admin' }, { name: 'user' }] },
-			site: { connect: { name: 'purpledreams' } },
+			sites: { connect: { name: 'purpledreams' } },
 		},
 	})
 
