@@ -228,10 +228,20 @@ CREATE INDEX "_UserSites_B_index" ON "_UserSites"("B");
 -- Create a sql dump of your database with `sqlite3 prisma/data.db .dump > seed.sql`
 -- Replace the SQL below with your new Roles & Permissions related SQL from `seed.sql`
 
+-- console.time('🌐 Created site...')
+-- const defaultSite = await prisma.site.create({
+-- 	select: { id: true },
+-- 	data: {
+-- 		name: 'purpledreams',
+-- 		description: 'PurpleDreams.io'
+-- 	},
+-- })
+-- console.timeEnd('🌐 Created site...')
+
 -- console.time('🔑 Created permissions...')
--- const entities = ['user', 'note']
+-- const entities = ['user', 'note', 'site', 'role', 'permission', 'connection'];
 -- const actions = ['create', 'read', 'update', 'delete']
--- const accesses = ['own', 'any'] as const
+-- const accesses = ['own', 'site', 'any'] as const
 
 -- let permissionsToCreate = []
 -- for (const entity of entities) {
@@ -247,13 +257,27 @@ CREATE INDEX "_UserSites_B_index" ON "_UserSites"("B");
 -- console.time('👑 Created roles...')
 -- await prisma.role.create({
 -- 	data: {
--- 		name: 'admin',
+-- 		name: 'super-admin',
 -- 		permissions: {
 -- 			connect: await prisma.permission.findMany({
 -- 				select: { id: true },
 -- 				where: { access: 'any' },
 -- 			}),
+-- 		}
+-- 	},
+-- })
+-- await prisma.role.create({
+-- 	data: {
+-- 		name: 'admin',
+-- 		permissions: {
+-- 			connect: await prisma.permission.findMany({
+-- 				select: { id: true },
+-- 				where: { access: 'site' },
+-- 			}),
 -- 		},
+-- 		sites: {
+-- 			connect: { id: defaultSite.id }
+-- 		}
 -- 	},
 -- })
 -- await prisma.role.create({
@@ -265,6 +289,9 @@ CREATE INDEX "_UserSites_B_index" ON "_UserSites"("B");
 -- 				where: { access: 'own' },
 -- 			}),
 -- 		},
+-- 		sites: {
+-- 			connect: { id: defaultSite.id }
+-- 		}
 -- 	},
 -- })
 -- console.timeEnd('👑 Created roles...')
@@ -421,21 +448,5 @@ INSERT INTO _RolePermissions VALUES('cm83vfanf001r9nszbznu90qy','cm83vfanq00239n
 INSERT INTO _RolePermissions VALUES('cm83vfanf001u9nszv3lh5ddy','cm83vfanq00239nsz2ipb6ozn');
 INSERT INTO _RolePermissions VALUES('cm83vfanf001x9nszh39lqml3','cm83vfanq00239nsz2ipb6ozn');
 
-INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfaq200249nszbky41df5');
-INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfas0002l9nszq8uclo39');
-INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfatx00369nszkifgatwc');
-INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfavv003t9nszmac2pygc');
-INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfaxq00469nszqeafj6df');
-INSERT INTO _UserRoles VALUES('cm83vfanl00219nsz2s95csi8','cm83vfazq004x9nszoxwrgjpd');
-INSERT INTO _UserRoles VALUES('cm83vfano00229nsz9uu6bvqt','cm83vfazq004x9nszoxwrgjpd');
-INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfazq004x9nszoxwrgjpd');
-
 INSERT INTO _RoleSites VALUES('cm83vfano00229nsz9uu6bvqt','cm83vfanj00209nszj2wcfi28');
 INSERT INTO _RoleSites VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfanj00209nszj2wcfi28');
-
-INSERT INTO _UserSites VALUES('cm83vfanj00209nszj2wcfi28','cm83vfaq200249nszbky41df5');
-INSERT INTO _UserSites VALUES('cm83vfanj00209nszj2wcfi28','cm83vfas0002l9nszq8uclo39');
-INSERT INTO _UserSites VALUES('cm83vfanj00209nszj2wcfi28','cm83vfatx00369nszkifgatwc');
-INSERT INTO _UserSites VALUES('cm83vfanj00209nszj2wcfi28','cm83vfavv003t9nszmac2pygc');
-INSERT INTO _UserSites VALUES('cm83vfanj00209nszj2wcfi28','cm83vfaxq00469nszqeafj6df');
-INSERT INTO _UserSites VALUES('cm83vfanj00209nszj2wcfi28','cm83vfazq004x9nszoxwrgjpd');
