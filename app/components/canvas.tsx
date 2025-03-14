@@ -43,8 +43,10 @@ class Dot {
 
 			if (!dot) return
 
-			if (dot.y < 0 || dot.y > this.canvas.height) [dot.vx, dot.vy] = [dot.vx, -dot.vy]
-			else if (dot.x < 0 || dot.x > this.canvas.width) [dot.vx, dot.vy] = [-dot.vx, dot.vy]
+			if (dot.y < 0 || dot.y > this.canvas.height)
+				[dot.vx, dot.vy] = [dot.vx, -dot.vy]
+			else if (dot.x < 0 || dot.x > this.canvas.width)
+				[dot.vx, dot.vy] = [-dot.vx, dot.vy]
 
 			dot.x += dot.vx
 			dot.y += dot.vy
@@ -56,9 +58,7 @@ type CanvasInitType = {
 	canvas: HTMLCanvasElement | null
 }
 
-const canvasInit = ({
-	canvas,
-}: CanvasInitType) => {
+const canvasInit = ({ canvas }: CanvasInitType) => {
 	if (!canvas) return
 
 	canvas.style.display = 'block'

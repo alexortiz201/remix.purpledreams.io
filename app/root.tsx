@@ -202,7 +202,7 @@ function App() {
 		>
 			<div className="grid min-h-screen grid-cols-1 grid-rows-2 md:grid-cols-3 md:grid-rows-1">
 				<LeftPanel />
-				<div className="col-[1] row-[2] md:row-[1] flex min-h-screen flex-col justify-between md:col-span-2">
+				<div className="col-[1] row-[2] flex min-h-screen flex-col justify-between md:col-span-2 md:row-[1]">
 					<header className="container py-6">
 						<nav className="flex flex-wrap items-center justify-between gap-4 sm:flex-nowrap md:gap-8">
 							<Logo />
