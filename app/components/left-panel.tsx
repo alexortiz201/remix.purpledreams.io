@@ -51,14 +51,15 @@ const Content = () => {
 	)
 }
 
-export const LeftPanel = ({ className }: { className?: string } = {}) => {
+export const LeftPanel = () => {
 	return (
-		<div className={`${className}`}>
+		<div className="dark relative col-[1] row-[1] flex min-h-screen flex-col place-content-center">
 			<div className="absolute flex w-full flex-1 flex-col">
 				<Content />
 			</div>
-			<div className="left-panel h-full min-h-screen"></div>
+
 			<CanvasAnimation className="absolute -z-10 size-full min-h-screen" />
+			<div className="left-panel h-full min-h-screen -z-20"></div>
 		</div>
 	)
 }

@@ -2,8 +2,6 @@ import { useEffect, useRef } from 'react'
 
 type DotsType = {
 	nb: number
-	distance: number
-	d_radius: number
 	array: Dot[]
 }
 
@@ -45,37 +43,39 @@ class Dot {
 
 			if (!dot) return
 
-			if (dot.y < 0 || dot.y > this.canvas.height) {
-				;[dot.vx, dot.vy] = [dot.vx, -dot.vy]
-			} else if (dot.x < 0 || dot.x > this.canvas.width) {
-				;[dot.vx, dot.vy] = [-dot.vx, dot.vy]
-			}
+			if (dot.y < 0 || dot.y > this.canvas.height) [dot.vx, dot.vy] = [dot.vx, -dot.vy]
+			else if (dot.x < 0 || dot.x > this.canvas.width) [dot.vx, dot.vy] = [-dot.vx, dot.vy]
+
 			dot.x += dot.vx
 			dot.y += dot.vy
 		}
 	}
 }
 
-// canvasInit(document.querySelector('canvas'))
-const canvasInit = (canvas: HTMLCanvasElement | null) => {
-	const ctxCanvas = canvas?.getContext('2d')
+type CanvasInitType = {
+	canvas: HTMLCanvasElement | null
+}
 
-	if (!canvas || !ctxCanvas) return
+const canvasInit = ({
+	canvas,
+}: CanvasInitType) => {
+	if (!canvas) return
 
 	canvas.style.display = 'block'
+	canvas.width = canvas.clientWidth
+	canvas.height = canvas.clientHeight
 
+	const ctxCanvas = canvas?.getContext('2d')
 	const color = '#72cc96'
+
+	if (!ctxCanvas) return
+
 	ctxCanvas.fillStyle = color
 	ctxCanvas.strokeStyle = color
 	ctxCanvas.lineWidth = 0.1
-	const mousePosition = {
-		x: (30 * canvas.width) / 100,
-		y: (30 * canvas.height) / 100,
-	}
+
 	const dots: DotsType = {
 		nb: 500,
-		distance: 80,
-		d_radius: 150,
 		array: [],
 	}
 
@@ -101,21 +101,17 @@ export const CanvasAnimation = ({ className }: { className?: string } = {}) => {
 
 	useEffect(() => {
 		const canvas = canvasRef.current
-		const animationTimerId = canvasInit(canvas)
+		const animationTimerId = canvasInit({ canvas })
 
-		return () => {
-			clearInterval(animationTimerId)
-		}
+		return () => clearInterval(animationTimerId)
 	}, [])
 
 	return (
 		<canvas
 			className={className}
 			ref={canvasRef}
-			width="960"
-			height="633"
+			width="auto"
+			height="auto"
 		></canvas>
 	)
 }
-
-export const dotInit = () => {}
