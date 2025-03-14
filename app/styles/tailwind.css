@@ -5,7 +5,12 @@
 @font-face {
 	font-family: 'weblysleek_uilight';
 	src: url('../assets/fonts/weblysleekuil.eot');
-	src: url('../assets/fonts/weblysleekuil.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/weblysleekuil.woff2') format('woff2'), url('../assets/fonts/weblysleekuil.woff') format('woff'), url('../assets/fonts/weblysleekuil.ttf') format('truetype'), url('../assets/fonts/weblysleekuil.svg#weblysleek_uilight') format('svg');
+	src:
+		url('../assets/fonts/weblysleekuil.eot?#iefix') format('embedded-opentype'),
+		url('../assets/fonts/weblysleekuil.woff2') format('woff2'),
+		url('../assets/fonts/weblysleekuil.woff') format('woff'),
+		url('../assets/fonts/weblysleekuil.ttf') format('truetype'),
+		url('../assets/fonts/weblysleekuil.svg#weblysleek_uilight') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -13,7 +18,13 @@
 @font-face {
 	font-family: 'LiberationMonoRegular';
 	src: url('../assets/fonts/liberation-mono-webfont.eot');
-	src: url('../assets/fonts/liberation-mono-webfont.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/liberation-mono-webfont.woff') format('woff'), url('../assets/fonts/liberation-mono-webfont.ttf') format('truetype'), url('../assets/fonts/liberation-mono-webfont.svg#LiberationMonoRegular') format('svg');
+	src:
+		url('../assets/fonts/liberation-mono-webfont.eot?#iefix')
+			format('embedded-opentype'),
+		url('../assets/fonts/liberation-mono-webfont.woff') format('woff'),
+		url('../assets/fonts/liberation-mono-webfont.ttf') format('truetype'),
+		url('../assets/fonts/liberation-mono-webfont.svg#LiberationMonoRegular')
+			format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -25,18 +36,18 @@
 
 		--gray: #d4d4d4;
 		--red: #ee5f5b;
-		--blue: #19B5FE;
+		--blue: #19b5fe;
 		--yellow: #f89406;
-		--aqua: #7FDBFF;
+		--aqua: #7fdbff;
 
 		--purple: #3b1f5c;
 		--turquois: #33ccba;
-		--green: #ABC65D;
-		--orange: #DFB626;
+		--green: #abc65d;
+		--orange: #dfb626;
 		--pink: #fe57a1;
 
-		--font-sans: "weblysleek_uilight", sans-serif;
-		--font-mono: "LiberationMonoRegular", monospace;
+		--font-sans: 'weblysleek_uilight', sans-serif;
+		--font-mono: 'LiberationMonoRegular', monospace;
 
 		/* prefixed with foreground because it should look good on the background */
 		--foreground-destructive: 345 82.7% 40.8%;
@@ -148,14 +159,14 @@ main h2 {
 }
 
 .color-pink {
-	color: var(--pink)
+	color: var(--pink);
 }
 
 .social-btn {
 	/* color: var(--green) */
 	&:hover {
 		color: var(--green);
-		transition-duration: .3s;
+		transition-duration: 0.3s;
 		transition-property: color;
 	}
 }

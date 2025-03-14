@@ -122,7 +122,9 @@ async function seed() {
 					providerId: String(githubUser.profile.id),
 				},
 			},
-			roles: { connect: [{ name: 'super-admin' }, { name: 'admin' }, { name: 'user' }] },
+			roles: {
+				connect: [{ name: 'super-admin' }, { name: 'admin' }, { name: 'user' }],
+			},
 			sites: { connect: { name: 'purpledreams' } },
 		},
 	})
