@@ -201,7 +201,7 @@ function App() {
 			getSrc={getImgSrc}
 		>
 			<div className="grid min-h-screen grid-cols-1 grid-rows-2 md:grid-cols-3 md:grid-rows-1">
-				<LeftPanel className="dark relative col-[1] row-[1] flex min-h-screen flex-col place-content-center" />
+				<LeftPanel />
 				<div className="col-[1] row-[2] md:row-[1] flex min-h-screen flex-col justify-between md:col-span-2">
 					<header className="container py-6">
 						<nav className="flex flex-wrap items-center justify-between gap-4 sm:flex-nowrap md:gap-8">
