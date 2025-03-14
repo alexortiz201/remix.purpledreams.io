@@ -59,7 +59,7 @@ export const LeftPanel = () => {
 			</div>
 
 			<CanvasAnimation className="absolute -z-10 size-full min-h-screen" />
-			<div className="left-panel h-full min-h-screen -z-20"></div>
+			<div className="left-panel -z-20 h-full min-h-screen"></div>
 		</div>
 	)
 }
