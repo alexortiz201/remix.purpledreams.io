@@ -19,7 +19,6 @@ export const meta: Route.MetaFunction = () => [{ title: 'Purple Dreams' }]
 // 	5: 'xl:row-start-5',
 // 	6: 'xl:row-start-6',
 // }
-const love = `love`
 export default function Index() {
 	return (
 		<main className="font-poppins grid place-items-center px-4 py-16 font-light xl:grid-cols-1 xl:gap-24">
@@ -31,8 +30,8 @@ export default function Index() {
 					data-paragraph
 					className="mt-6 animate-slide-top text-xl/7 text-muted-foreground [animation-delay:0.8s] [animation-fill-mode:backwards] xl:mt-8 xl:animate-slide-left xl:text-xl/6 xl:leading-10 xl:[animation-delay:1s] xl:[animation-fill-mode:backwards]"
 				>
-					<span className="block">Front end focus full stack engineer.</span>I{' '}
-					<span className="color-pink">{love}</span> building wonderful web
+					<span className="block">Front end focus full stack engineer.</span>
+					I <span className="color-pink">love</span> building wonderful web
 					experiences, from the pixel perfect layouts on the frontend to
 					reliable, scalable, and easy to use API’s on the backend.
 				</p>
