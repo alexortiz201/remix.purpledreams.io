@@ -63,6 +63,9 @@ export default defineConfig((config) => ({
 			all: true,
 		},
 	},
+	ssr: {
+		noExternal: [/^@keystatic\//, 'minimatch'],
+	}
 }))
 
 const sentryConfig: SentryReactRouterBuildOptions = {
