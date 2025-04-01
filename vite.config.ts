@@ -68,4 +68,7 @@ export default {
 			all: true,
 		},
 	},
+	ssr: {
+		noExternal: [/^@keystatic\//, 'minimatch'],
+	}
 } satisfies ViteUserConfig
