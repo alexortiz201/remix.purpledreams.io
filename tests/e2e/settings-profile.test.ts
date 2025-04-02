@@ -45,7 +45,7 @@ test('Users can update their password', async ({ page, login }) => {
 	expect(
 		await verifyUserPassword({ username }, oldPassword),
 		'Old password still works',
-	).toEqual(null)
+	).toBeNull()
 	expect(
 		await verifyUserPassword({ username }, newPassword),
 		'New password does not work',
@@ -58,7 +58,6 @@ test('Users can update their profile photo', async ({ page, login }) => {
 
 	const beforeSrc = await page
 		.getByRole('img', { name: user.name ?? user.username })
-		.getAttribute('src')
 
 	await page.getByRole('link', { name: /change profile photo/i }).click()
 
@@ -77,9 +76,8 @@ test('Users can update their profile photo', async ({ page, login }) => {
 
 	const afterSrc = await page
 		.getByRole('img', { name: user.name ?? user.username })
-		.getAttribute('src')
 
-	expect(beforeSrc).not.toEqual(afterSrc)
+	expect(beforeSrc.getAttribute('src')).not.toBe(afterSrc.getAttribute('src'));
 })
 
 test('Users can change their email address', async ({ page, login }) => {
