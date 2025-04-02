@@ -64,7 +64,7 @@
     "@radix-ui/react-slot": "^1.1.2",
     "@radix-ui/react-toast": "^1.2.6",
     "@radix-ui/react-tooltip": "^1.1.8",
-    "@react-email/components": "0.0.34",
+    "@react-email/components": "0.0.35",
     "@react-router/express": "^7.4.0",
     "@react-router/node": "^7.4.0",
     "@react-router/remix-routes-option-adapter": "^7.4.0",
@@ -137,10 +137,14 @@
     "@types/glob": "^8.1.0",
     "@types/mime-types": "^2.1.4",
     "@types/morgan": "^1.9.9",
+<<<<<<< HEAD
     "@types/node": "^22.13.11",
+=======
+    "@types/node": "^22.13.17",
+>>>>>>> 399caa0 (check updates)
     "@types/qrcode": "^1.5.5",
-    "@types/react": "^19.0.12",
-    "@types/react-dom": "^19.0.4",
+    "@types/react": "^19.0.14",
+    "@types/react-dom": "^19.0.6",
     "@types/set-cookie-parser": "^2.4.10",
     "@types/source-map-support": "^0.5.10",
     "@vitejs/plugin-react": "^4.3.4",
