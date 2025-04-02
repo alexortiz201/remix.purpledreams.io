@@ -1,0 +1,50 @@
+---
+title: Building my site 001
+publishedOn: 2024-04-02
+---
+
+# Building my site 001
+
+> A small set of posts to document my process building out my portfolio site, which I also use to manage my clients' sites and my blog.
+
+#### Why write about this?
+I've been having to update my schema as I build new functionality out for my site. Every time I update the schema I have to update the prisma client and the db to reflect the changes. Unfortunately, since I'm working on both the site to support posts and a blog while also developing out the Rust & Wasm game, these changes happen scarcely and I am lost all over again when updating the blog. Time to fix this by writing all this down.
+
+
+##### Custom Paths in package.json borked
+Turns out once you add something like a root pointer `"#*: './*'"` this exact line needs to go into the typescript compiler, 🙈 *DUH!* Now configs are easily imported.
+
+##### Updating my schema and seed file
+So the first thing I wanted to extend the seed file with were two seed posts for my blog. Initially, I did this when modifying my roles to support multi
+
+##### What's next? DB
+
+##### Quick pivot... [Keystatic](https://keystatic.com/)
+I was going to work on developing the DB to support MDX content but I realized Keystatic would cut the active blog dev time down to a fraction and allows some github mode integration niceness. Also its FREEEEE!
+
+##### Package.json changes
+I'm gonna list updates to my package.json here with notes on why I added this stuff
+
+First,
+
+```json
+// # package.json
+...
+"import": {
+	"#*": "./*", // Added easy root import paths as '#/keystatic.config'
+}
+...
+```
+
+Second,
+```json
+// # tsconfig.json
+...
+"compilerOptions": {
+
+	"moduleResolution": "bundler", // Makes it so typescript doesn't squiggly on node_module imports, not sure why some wouldn't error and others would, but this fixed it.
+...
+"paths": {
+	"#*": ["./*"], // Same reason as package.json above
+...
+```
