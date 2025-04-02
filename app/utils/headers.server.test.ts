@@ -9,7 +9,7 @@ test('works for basic usecase', () => {
 		'private, max-age=86400',
 	)
 
-	expect(result).toEqual(
+	expect(result).toBe(
 		format({
 			maxAge: 1800,
 			sharedMaxAge: 600,
