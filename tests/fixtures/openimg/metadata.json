@@ -42,5 +42,37 @@
   "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/user/0-jpg-w-256-h-256-fit-base.avif": {
     "size": 3355,
     "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm91d7hqj00039nvwysjxye9f/notes/loc1gx1cr05v6rx4pbstgnde/images/1743685302245-vz9d40nyhzbmygh83fmyzypt-png-w-512-h-512-fit-base.avif": {
+    "size": 11983,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm91d7i6400069nvwr69zjw51/notes/wd4p5yu43sobnr98a1cey5ig/images/1743685302792-bng4xiqj56f7298yw427c15b-png-w-512-h-512-fit-base.avif": {
+    "size": 13576,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm91d7i6400069nvwr69zjw51/notes/wd4p5yu43sobnr98a1cey5ig/images/1743685302790-slqtkzz1ix5gxvuj8i99fdja-png-w-512-h-512-fit-base.avif": {
+    "size": 11983,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm91d7ilq00099nvwsa6mwjpz/notes/cm91d7ily000d9nvwqkrfgf6p/images/1743685303569-it93f24k1rvlpt0v4qc940o0-png-w-512-h-512-fit-base.avif": {
+    "size": 13576,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm91d7mx8000d9nv9igmpl8yl/profile-images/1743685308629-x2ud7li2k9f3yzm6r0mj0s2h-downloaded-file-w-256-h-256-fit-base.avif": {
+    "size": 1892,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm91d7nxy000m9nv9eh4fz4xm/profile-images/1743685309951-l7f1v8w6eycacs8kn2pgkhlf-downloaded-file-w-256-h-256-fit-base.avif": {
+    "size": 1892,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm91d7sah00119nvwfntphqoo/profile-images/1743685315901-jhh9iwaepozz73e3vxr062uf-png-w-256-h-256-fit-base.avif": {
+    "size": 8735,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm91d7sah00119nvwfntphqoo/profile-images/1743685315901-jhh9iwaepozz73e3vxr062uf-png-w-832-h-832-fit-base.avif": {
+    "size": 35671,
+    "contentType": "image/avif"
   }
 }
