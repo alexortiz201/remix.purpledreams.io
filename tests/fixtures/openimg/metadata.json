@@ -74,5 +74,37 @@
   "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm91d7sah00119nvwfntphqoo/profile-images/1743685315901-jhh9iwaepozz73e3vxr062uf-png-w-832-h-832-fit-base.avif": {
     "size": 35671,
     "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm94n3jc700039nbdsdxkraug/notes/avg7tq1gdx5j8m8aflrjbuz5/images/1743883312526-jztop3h2un6xjl60xqhminv9-png-w-512-h-512-fit-base.avif": {
+    "size": 11983,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm94n3jvn00069nbdhfo31wcf/notes/u83bsj6x1464kyculg5i1qur/images/1743883313123-qpdq1u3kwjmqchd59drr84ne-png-w-512-h-512-fit-base.avif": {
+    "size": 13576,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm94n3jvn00069nbdhfo31wcf/notes/u83bsj6x1464kyculg5i1qur/images/1743883313121-icvx1pnhjw4lx7xoc50usotl-png-w-512-h-512-fit-base.avif": {
+    "size": 11983,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm94n3kcx00099nbd7bz8vgp1/notes/cm94n3kd4000d9nbdk4l7t41p/images/1743883313731-gqq6e92o36o4mjln0s41qzdf-png-w-512-h-512-fit-base.avif": {
+    "size": 13576,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm94n3o1a000d9nas84cawnav/profile-images/1743883318133-ugdj5vjas4e6xjlx5gzbuj5y-downloaded-file-w-256-h-256-fit-base.avif": {
+    "size": 1892,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm94n3p44000m9nas9lfjyhnz/profile-images/1743883319532-sa4i91nizf90tpfpz5u55xvt-downloaded-file-w-256-h-256-fit-base.avif": {
+    "size": 1892,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm94n3tf700119nbdput9mhyu/profile-images/1743883325415-w09eqhwz5o94d440vf8nwluc-png-w-256-h-256-fit-base.avif": {
+    "size": 8735,
+    "contentType": "image/avif"
+  },
+  "./tests/fixtures/openimg/fly-storage-tigris-dev/mock-bucket/users/cm94n3tf700119nbdput9mhyu/profile-images/1743883325415-w09eqhwz5o94d440vf8nwluc-png-w-832-h-832-fit-base.avif": {
+    "size": 35671,
+    "contentType": "image/avif"
   }
 }
