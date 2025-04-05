@@ -153,6 +153,7 @@ app.use((req, res, next) => {
 		'/settings/profile',
 		'/resources/login',
 		'/resources/verify',
+		'/keystatic',
 	]
 	if (req.method !== 'GET' && req.method !== 'HEAD') {
 		if (strongPaths.some((p) => req.path.includes(p))) {
