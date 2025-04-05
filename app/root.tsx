@@ -188,11 +188,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 function App() {
 	const data = useLoaderData<typeof loader>()
-	const user = useOptionalUser()
 	const theme = useTheme()
-	const matches = useMatches()
-	const isOnSearchPage = matches.find((m) => m.id === 'routes/users+/index')
-	const searchBar = isOnSearchPage ? null : <SearchBar status="idle" />
+
 	useToast(data.toast)
 
 	return (
@@ -200,38 +197,9 @@ function App() {
 			optimizerEndpoint="/resources/images"
 			getSrc={getImgSrc}
 		>
-			<div className="grid min-h-screen grid-cols-1 grid-rows-2 md:grid-cols-3 md:grid-rows-1">
-				<LeftPanel />
-				<div className="col-[1] row-[2] flex min-h-screen flex-col justify-between md:col-span-2 md:row-[1]">
-					<header className="container py-6">
-						<nav className="flex flex-wrap items-center justify-between gap-4 sm:flex-nowrap md:gap-8">
-							<Logo />
-							<div className="ml-auto hidden max-w-sm flex-1 sm:block">
-								{searchBar}
-							</div>
-							<div className="flex items-center gap-10">
-								{user ? (
-									<UserDropdown />
-								) : (
-									<Button asChild variant="default" size="lg">
-										<Link to="/login">Log In</Link>
-									</Button>
-								)}
-							</div>
-							<div className="block w-full sm:hidden">{searchBar}</div>
-						</nav>
-					</header>
-
-					<div className="flex flex-1 flex-col place-content-center">
-						<Outlet />
-					</div>
-
-					<div className="container flex justify-between pb-5">
-						<Logo />
-						<ThemeSwitch userPreference={data.requestInfo.userPrefs.theme} />
-					</div>
-				</div>
-			</div>
+			<Header />
+			<Outlet />
+			<Footer theme={data.requestInfo.userPrefs.theme}/>
 			<EpicToaster closeButton position="top-center" theme={theme} />
 			<EpicProgress />
 		</OpenImgContextProvider>
@@ -257,6 +225,42 @@ function AppWithProviders() {
 		<HoneypotProvider {...data.honeyProps}>
 			<App />
 		</HoneypotProvider>
+	)
+}
+
+function Footer({ theme }: { theme: Theme | null }) {
+	return (
+		<footer className="container py-6 pb-5 flex justify-between">
+			<Logo />
+			<ThemeSwitch userPreference={theme} />
+		</footer>
+	)
+}
+
+function Header() {
+	const matches = useMatches()
+	const isOnSearchPage = matches.find((m) => m.id === 'routes/users+/index')
+	const user = useOptionalUser()
+	const searchBar = isOnSearchPage ? null : <SearchBar status="idle" />
+	return (
+		<header className="container py-6">
+			<nav className="flex flex-wrap items-center justify-between gap-4 sm:flex-nowrap md:gap-8">
+				<Logo />
+				<div className="ml-auto hidden max-w-sm flex-1 sm:block">
+					{searchBar}
+				</div>
+				<div className="flex items-center gap-10">
+					{user ? (
+						<UserDropdown />
+					) : (
+						<Button asChild variant="default" size="lg">
+							<Link to="/login">Log In</Link>
+						</Button>
+					)}
+				</div>
+				<div className="block w-full sm:hidden">{searchBar}</div>
+			</nav>
+		</header>
 	)
 }
 
