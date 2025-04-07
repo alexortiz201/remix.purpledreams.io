@@ -33,8 +33,8 @@ ARG COMMIT_SHA
 ENV COMMIT_SHA=$COMMIT_SHA
 
 # Use the following environment variables to configure Sentry
-# ENV SENTRY_ORG=
-# ENV SENTRY_PROJECT=
+ENV SENTRY_ORG="purple-dreams"
+ENV SENTRY_PROJECT="remix-purpledreams"
 
 
 WORKDIR /myapp
