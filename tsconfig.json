@@ -3,6 +3,7 @@
 	"extends": ["@epic-web/config/typescript"],
 	"compilerOptions": {
 		"moduleResolution": "bundler",
+		"esModuleInterop": true,
 		// TODO: Probably should move this into epic-web/config
 		"types": ["@react-router/node", "vite/client"],
 		"rootDirs": [".", "./.react-router/types"],

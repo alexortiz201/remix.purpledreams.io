@@ -1,6 +1,6 @@
 import { bundleMDX } from 'mdx-bundler'
 import { getMDXComponent } from 'mdx-bundler/client'
-import * as React from 'react'
+import { useMemo } from 'react'
 import { useLoaderData } from 'react-router'
 
 import { reader } from '#utils/keystatic-reader.server'
@@ -26,11 +26,11 @@ export async function loader({ params }: Route.LoaderArgs) {
 
 export default function Post() {
 	const { post, code } = useLoaderData<typeof loader>()
-	const Component = React.useMemo(() => getMDXComponent(code), [code])
+	const Component = useMemo(() => getMDXComponent(code), [code])
 	return (
-		<div className="container py-16">
-			<h1 className="text-3xl font-semibold">{post.title}</h1>
-			<div className="prose prose-p:text-black mt-6">
+		<div className="container py-16 keystatic__post">
+			<h1 className="text-3xl font-semibold header-styles">{post.title}</h1>
+			<div className="prose dark:prose-invert mt-6 max-w-full">
 				<Component />
 			</div>
 		</div>

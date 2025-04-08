@@ -9,6 +9,13 @@ export default {
 	content: ['./app/**/*.{ts,tsx,jsx,js,mdx}'],
 	darkMode: 'class',
 	theme: {
+		// typography: {
+    //   DEFAULT: { // this is for prose class
+    //     css: {
+    //       color: theme('colors.yourSpecificColor')
+		// 		}
+		// 	}
+		// },
 		container: {
 			center: true,
 			padding: '2rem',
@@ -21,3 +28,5 @@ export default {
 	presets: [marketingPreset],
 	plugins: [animatePlugin, radixPlugin, typographyPlugin],
 } satisfies Config
+
+
