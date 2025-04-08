@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { CanvasAnimation } from './canvas'
 import { Icon } from './ui/icon'
 
@@ -43,6 +44,13 @@ const Content = () => {
 									<span className="sr-only">Github</span>
 								</Icon>
 							</a>
+						</li>
+						<li className="flex">
+							<Link to="/blog">
+								<Icon className="size-[1.5em] social-btn" name="chat-bubble">
+									<span className="sr-only">Blog</span>
+								</Icon>
+							</Link>
 						</li>
 					</ul>
 				</div>
