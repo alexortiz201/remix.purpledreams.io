@@ -290,3 +290,24 @@ export async function downloadFile(url: string, retries: number = 0) {
 		return downloadFile(url, retries + 1)
 	}
 }
+
+// Types for the result object with discriminated union
+/**
+ * Based off:
+ * Theo tryCatch: https://gist.github.com/t3dotgg/a486c4ae66d32bf17c09c73609dacc5b
+ * Try Operator proposal: https://github.com/arthurfiorette/proposal-try-operator
+ *  	[ok, err, result]
+ */
+type Success<T> = [ true, false, T ]
+type Failure<E> = [ false, true, E ]
+type Result<T, E = Error> = Success<T> | Failure<E>;
+
+export async function tryOp<T, E = Error>(
+  promise: Promise<T>,
+): Promise<Result<T, E>> {
+  try {
+    return [ true, false, await promise ]
+  } catch (error) {
+    return  [ false, true, error as E ]
+  }
+}

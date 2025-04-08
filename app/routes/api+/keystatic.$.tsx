@@ -5,9 +5,9 @@ import { requireUserWithRole } from '#app/utils/permissions.server.ts'
 
 export const loader: LoaderFunction = async (args) => {
   await requireUserWithRole(args.request, 'admin')
-  return handleLoader({ config }, { ...args })
+  return handleLoader({ config }, args)
 }
 export const action: ActionFunction = async (args) => {
   await requireUserWithRole(args.request, 'admin')
-  return handleLoader({ config }, { ...args })
+  return handleLoader({ config }, args)
 }
