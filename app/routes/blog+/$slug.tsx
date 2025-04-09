@@ -3,6 +3,7 @@ import { getMDXComponent } from 'mdx-bundler/client'
 import { useMemo } from 'react'
 import { useLoaderData } from 'react-router'
 
+import { SocialLinkList } from '#app/components/social-icon-link-list.tsx'
 import { reader } from '#utils/keystatic-reader.server'
 import { type Route } from './+types/$slug'
 
@@ -28,8 +29,11 @@ export default function Post() {
 	const { post, code } = useLoaderData<typeof loader>()
 	const Component = useMemo(() => getMDXComponent(code), [code])
 	return (
-		<div className="container py-16 keystatic__post">
-			<h1 className="text-3xl font-semibold header-styles">{post.title}</h1>
+		<div className="container py-16 keystatic__blog">
+			<h1 className="text-3xl font-semibold underline decoration-[var(--green)] decoration-[3px] mb-2">{post.title}</h1>
+			<div className='text-sm text-[var(--gray)]'>
+				<SocialLinkList />
+			</div>
 			<div className="prose dark:prose-invert mt-6 max-w-full">
 				<Component />
 			</div>

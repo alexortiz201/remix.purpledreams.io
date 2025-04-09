@@ -2,7 +2,7 @@ import { config, fields, collection } from '@keystatic/core';
 import { Link } from 'react-router'
 
 const Mark = () => (
-		<Link to='/' className="a__logo-link keystatic__logo-width">
+		<Link to='/' className="keystatic__logo-width">
 			<img src="/img/logo04.png" />
 			<span className="sr-only">Home</span>
 		</Link>
