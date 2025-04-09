@@ -34,7 +34,7 @@ export default function Post() {
 			<div className='text-sm text-[var(--gray)]'>
 				<SocialLinkList />
 			</div>
-			<div className="prose dark:prose-invert mt-6 max-w-full">
+			<div className="prose dark:prose-invert mt-6 max-w-full text-sm md:text-lg">
 				<Component />
 			</div>
 		</div>
