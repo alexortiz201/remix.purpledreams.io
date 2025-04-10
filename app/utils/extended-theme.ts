@@ -106,7 +106,6 @@ export const extendedTheme = {
 				'--tw-prose-headings': 'var(--green)',
 				'--tw-prose-invert-headings': 'var(--green)',
 				'--tw-prose-invert-pre-bg': '#150f1e',
-				'--tw-prose-invert-code-bg': '#150f1e',
 				'--tw-prose-links': 'var(--turquois)',
 				'--tw-prose-invert-links': 'var(--turquois)'
 			}

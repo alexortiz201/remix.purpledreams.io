@@ -16,6 +16,8 @@ export default remixRoutesOptionAdapter((defineRoutes) => {
 			// my-route.[server].tsx
 			'**/*.server.*',
 			'**/*.client.*',
+			// Remove below when ready to expose
+			'**/users+/**',
 		],
 	})
 }) satisfies RouteConfig

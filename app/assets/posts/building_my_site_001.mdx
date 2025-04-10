@@ -46,3 +46,12 @@ Second,
 	"#*": ["./*"], // Same reason as package.json above
 ...
 ```
+
+#### Fly.io is deploying now...
+Using `fly logs` I was able to determine that my esbuild in my mdx package isn't getting found. I had to delete the package-lock.json and re-install. I also deleted all the node_modules before installing. This caused an issue with prisma and its dependancy in the node_modules to go missing,
+`import { searchUsers } from '@prisma/client/sql'`
+in my `users+/index.html` file. That did it!
+
+
+#### Typescript screaming over typographyplugin
+Had to add `"esModuleInterop": true,` to my tsconfig.json so tailwind.config.ts would allow me to import the plugin `import typographyPlugin from '@tailwindcss/typography'`
