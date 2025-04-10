@@ -31,7 +31,7 @@ const LoginAndSearch = () => {
 }
 
 export function Header() {
-  const showLogin = process.env.NODE_ENV !== 'production'
+  const showLogin = true //process.env.NODE_ENV !== 'production'
 
   return (
     <header className='container py-6'>

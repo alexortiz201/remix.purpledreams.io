@@ -2,6 +2,8 @@ import { type RouteConfig } from '@react-router/dev/routes'
 import { remixRoutesOptionAdapter } from '@react-router/remix-routes-option-adapter'
 import { flatRoutes } from 'remix-flat-routes'
 
+// const WIP_ROUTES = process.env.NODE_ENV === 'production' ? ['**/users+/**'] : []
+
 export default remixRoutesOptionAdapter((defineRoutes) => {
 	return flatRoutes('routes', defineRoutes, {
 		ignoredRouteFiles: [
@@ -17,7 +19,7 @@ export default remixRoutesOptionAdapter((defineRoutes) => {
 			'**/*.server.*',
 			'**/*.client.*',
 			// Remove below when ready to expose
-			'**/users+/**',
+			// ...WIP_ROUTES,
 		],
 	})
 }) satisfies RouteConfig
