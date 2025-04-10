@@ -5,7 +5,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@font-face {
+/* @font-face {
 	font-family: 'weblysleek_uilight';
 	src: url('../assets/fonts/weblysleekuil.eot');
 	src:
@@ -28,7 +28,7 @@
 		url('../assets/fonts/liberation-mono-webfont.svg#LiberationMonoRegular') format('svg');
 	font-weight: normal;
 	font-style: normal;
-}
+} */
 
 :root {
 	--radius: 0.5rem;
@@ -66,7 +66,6 @@
 	--ring: oklch(71.07% 0.0351 256.79);
 
 	--color-gray-333: #333333;
-	--tw-prose-invert-pre-bg: #150f1e;
 
 	--gray: #d4d4d4;
 	--red: #ee5f5b;
@@ -80,10 +79,14 @@
 	--orange: #dfb626;
 	--pink: #fe57a1;
 
-	--font-sans: 'weblysleek_uilight', sans-serif;
-	--font-mono: 'LiberationMonoRegular', monospace;
-	/* --tw-prose-invert-pre-bg: '#150f1e';
-	--tw-prose-pre-bg: '#150f1e'; */
+	/* --font-sans: 'weblysleek_uilight', sans-serif;
+	--font-mono: 'LiberationMonoRegular', monospace; */
+
+	/* '--tw-prose-headings': 'var(--green)',
+			'--tw-prose-invert-headings': 'var(--green)',
+			'--tw-prose-invert-pre-bg': '#150f1e',
+			'--tw-prose-links': 'var(--turquois)',
+			'--tw-prose-invert-links': 'var(--turquois)' */
 }
 
 .dark {
@@ -269,7 +272,7 @@
 	}
 }
 
-
+/* underline decoration-[var(--green)] decoration-[3px] */
 /* /img/home.png */
 
 .social-btn {
@@ -287,29 +290,30 @@
 }
 
 .keystatic__blog {
-	/* :root {
-		--tw-prose-invert-pre-bg: '#150f1e';
-	} */
-
 	text-wrap-mode: wrap;
+
+	& h4 {
+		color: var(--green);
+	}
 
 	& pre {
 		font-size: .75rem;
-		background-color: '#150f1e';
+		background-color: #150f1e;
 	}
 
 	& code {
+		color: #fff;
 		font-size: .75rem;
-		background-color: '#150f1e';
-		padding: 8px 4px;
+		background-color: #150f1e;
+		padding: 6px 4px;
 		margin: 0 4px;
 	}
 
-		/* '--tw-prose-headings': 'var(--green)',
-		'--tw-prose-invert-headings': 'var(--green)',
-		'--tw-prose-invert-pre-bg': '#150f1e',
-		'--tw-prose-links': 'var(--turquois)',
-		'--tw-prose-invert-links': 'var(--turquois)' */
-}
+	& a {
+		color: var(--turquois);
 
-/* underline decoration-[var(--green)] decoration-[3px] */
+		&:hover {
+			filter: brightness(.8);
+		}
+	}
+}
