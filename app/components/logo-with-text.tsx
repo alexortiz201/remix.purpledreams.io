@@ -1,8 +1,10 @@
+// import { Img } from 'openimg/react'
+
 const PURPLEDREAMS_LINK = '/'
 export const LogoWithText = ({ logoLink = PURPLEDREAMS_LINK } = {}) => (
   <>
-    <a href={logoLink} className="w-[60px]">
-      <img className='grayscale-[25%]' src="/img/logo04.png" />
+    <a href={logoLink}>
+      <img src="/img/logo04.png" alt={'Purple Dreams'} width={60} height={39} />
     </a>
     <h1
       data-heading
