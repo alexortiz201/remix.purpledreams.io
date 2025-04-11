@@ -5,6 +5,8 @@ import { Button } from '#app/components/ui/button.tsx'
 import { UserDropdown } from '#app/components/user-dropdown.tsx'
 import { useOptionalUser } from '#app/utils/user.ts'
 
+const showLogin = ENV.MODE !== 'production' || ENV.MOCKS === true
+
 const LoginAndSearch = () => {
   const matches = useMatches()
   const isOnSearchPage = matches.find((m) => m.id === 'routes/users+/index')
@@ -31,8 +33,6 @@ const LoginAndSearch = () => {
 }
 
 export function Header() {
-  const showLogin = true //process.env.NODE_ENV !== 'production'
-
   return (
     <header className='container py-6'>
       <nav className="flex flex-wrap items-center justify-between gap-4 sm:flex-nowrap md:gap-8">

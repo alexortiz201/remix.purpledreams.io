@@ -61,6 +61,7 @@ export function getEnv() {
 		MODE: process.env.NODE_ENV,
 		SENTRY_DSN: process.env.SENTRY_DSN,
 		ALLOW_INDEXING: process.env.ALLOW_INDEXING,
+		MOCKS: process.env.MOCKS === 'true',
 	}
 }
 
