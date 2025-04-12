@@ -55,3 +55,8 @@ in my `users+/index.html` file. That did it!
 
 #### Typescript screaming over typographyplugin
 Had to add `"esModuleInterop": true,` to my tsconfig.json so tailwind.config.ts would allow me to import the plugin `import typographyPlugin from '@tailwindcss/typography'`
+
+
+#### Moving my site from github pages to fly.io
+I took a few steps just cause I'm not the most familiar with all this. First thing I noticed was the even though I was point at my fly.io project with an A record on my apex domain (and AAAA record), after a few hours it was still resolving to vercel's ip. I'm not sure if it was cache but the day before I saw my purpledreams.io resolve after being down when pointing away from github pages with the new records. Well, the next day it was down again. I wasn't sure but github pages tells you to put a CNAME record on the project to point to the domain, I'm not sure if github does something with this, as in pushing this to DNS servers and what not. To make sure github's cname file wasn't causing issues I deleted that. Afterwards, the domain routing was not working yet and it still pointed to vercel's ips. My last step after a lot of looking around was to create the certs through fly.io `fly certs add purpledreams.io` and `fly certs add www.purpledreams.io`. Then, adding a cname record to my domain in the vercel app as suggested by the feedback in the fly.io cli tool. BANG! It's live now!
+I'm not sure if maybe fly.io requires certs in its platform, if certs can't be transferred when changing records or ips, if the cname record was missing, or if having a CNAME file in github pages does something to fudge the DNS server's cache of said CNAME. I'll have to test this out individually to see.
