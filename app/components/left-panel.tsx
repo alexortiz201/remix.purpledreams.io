@@ -1,4 +1,4 @@
-import { CanvasAnimation } from './canvas'
+import { ColoredDotsAnimation } from '#app/components/canvas-animations/canvas-colored-dots.tsx'
 import { LogoWithSocial } from './logo-with-social'
 
 export const LeftPanel = () => {
@@ -8,7 +8,7 @@ export const LeftPanel = () => {
 				<LogoWithSocial className='px-4 py-16' />
 			</div>
 
-			<CanvasAnimation className="absolute size-full min-h-screen -z-40" />
+			<ColoredDotsAnimation className="absolute size-full min-h-screen -z-40" />
 			<div className='bg-[var(--color-gray-333)] -z-50'>
 				<div className="bg-[url(/img/unsplash-image-1.jpg)] bg-cover opacity-[0.7] h-full min-h-screen"></div>
 			</div>

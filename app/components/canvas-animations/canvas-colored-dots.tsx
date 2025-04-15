@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 
+/** @TODO port to webgpu */
 type DotsType = {
 	nb: number
 	array: Dot[]
@@ -56,9 +57,12 @@ class Dot {
 
 type CanvasInitType = {
 	canvas: HTMLCanvasElement | null
+	color?: string
 }
 
-const canvasInit = ({ canvas }: CanvasInitType) => {
+const DOT_COLOR_DEFAULT = '#72cc96'
+
+const canvasInit = ({ canvas, color = DOT_COLOR_DEFAULT }: CanvasInitType) => {
 	if (!canvas) return
 
 	canvas.style.display = 'block'
@@ -66,7 +70,6 @@ const canvasInit = ({ canvas }: CanvasInitType) => {
 	canvas.height = canvas.clientHeight
 
 	const ctxCanvas = canvas?.getContext('2d')
-	const color = '#72cc96'
 
 	if (!ctxCanvas) return
 
@@ -96,15 +99,20 @@ const canvasInit = ({ canvas }: CanvasInitType) => {
 	return setInterval(createDots, 1000 / 30)
 }
 
-export const CanvasAnimation = ({ className }: { className?: string } = {}) => {
+type DotsAnimationParams = {
+	className?: string
+	dotColor?: string
+}
+
+export const ColoredDotsAnimation = ({ className, dotColor = DOT_COLOR_DEFAULT }: DotsAnimationParams = {}) => {
 	const canvasRef = useRef(null)
 
 	useEffect(() => {
 		const canvas = canvasRef.current
-		const animationTimerId = canvasInit({ canvas })
+		const animationTimerId = canvasInit({ canvas, color: dotColor })
 
 		return () => clearInterval(animationTimerId)
-	}, [])
+	}, [dotColor])
 
 	return (
 		<canvas
