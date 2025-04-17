@@ -72,7 +72,7 @@ export async function action({ request }: Route.ActionArgs) {
 
 	const response = await sendEmail({
 		to: email,
-		subject: `Welcome to Purple Dreams!`,
+		subject: `Welcome to Salon Expo Studio!`,
 		react: <SignupEmail onboardingUrl={verifyUrl.toString()} otp={otp} />,
 	})
 
@@ -101,7 +101,7 @@ export function SignupEmail({
 		<E.Html lang="en" dir="ltr">
 			<E.Container>
 				<h1>
-					<E.Text>Welcome to Purple Dreams!</E.Text>
+					<E.Text>Welcome to Salon Expo Studio!</E.Text>
 				</h1>
 				<p>
 					<E.Text>
@@ -118,7 +118,7 @@ export function SignupEmail({
 }
 
 export const meta: Route.MetaFunction = () => {
-	return [{ title: 'Sign Up | Purple Dreams' }]
+	return [{ title: 'Sign Up | Salon Expo Studio' }]
 }
 
 export default function SignupRoute({ actionData }: Route.ComponentProps) {

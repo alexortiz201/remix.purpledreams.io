@@ -56,8 +56,8 @@ export const links: Route.LinksFunction = () => {
 
 export const meta: Route.MetaFunction = ({ data }) => {
 	return [
-		{ title: data ? 'Purple Dreams' : 'Error | Purple Dreams' },
-		{ name: 'description', content: `Welcome to my Purple Dreams` },
+		{ title: data ? 'Salon Expo Studio' : 'Error | Salon Expo Studio' },
+		{ name: 'description', content: `Welcome to Salon Expo Studio` },
 	]
 }
 

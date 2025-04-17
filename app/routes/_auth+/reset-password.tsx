@@ -76,7 +76,7 @@ export async function action({ request }: Route.ActionArgs) {
 }
 
 export const meta: Route.MetaFunction = () => {
-	return [{ title: 'Reset Password | Purple Dreams' }]
+	return [{ title: 'Reset Password | Salon Expo Studio' }]
 }
 
 export default function ResetPasswordPage({

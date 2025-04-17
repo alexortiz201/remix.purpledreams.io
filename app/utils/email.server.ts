@@ -21,7 +21,7 @@ const resendSuccessSchema = z.object({
 	id: z.string(),
 })
 
-export const EMAIL_FROM = "no-reply@transactional.purpledreams.io"
+export const EMAIL_FROM = "no-reply@transactional.salonexpo.studio"
 export async function sendEmail({
 	react,
 	...options

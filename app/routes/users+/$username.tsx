@@ -109,10 +109,10 @@ export default function ProfileRoute() {
 export const meta: Route.MetaFunction = ({ data, params }) => {
 	const displayName = data?.user.name ?? params.username
 	return [
-		{ title: `${displayName} | Purple Dreams` },
+		{ title: `${displayName} | Salon Expo Studio` },
 		{
 			name: 'description',
-			content: `Profile of ${displayName} on Purple Dreams`,
+			content: `Profile of ${displayName} on Salon Expo Studio`,
 		},
 	]
 }
