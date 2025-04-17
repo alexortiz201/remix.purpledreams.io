@@ -79,7 +79,7 @@ export async function action({ request }: Route.ActionArgs) {
 
 	const response = await sendEmail({
 		to: submission.value.email,
-		subject: `Salon Expo Studio Email Change Verification`,
+		subject: `Purple Dreams Email Change Verification`,
 		react: <EmailChangeEmail verifyUrl={verifyUrl.toString()} otp={otp} />,
 	})
 

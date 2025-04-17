@@ -112,9 +112,9 @@ async function seed() {
 	const alex = await prisma.user.create({
 		select: { id: true },
 		data: {
-			email: 'richard@transactional.salonexpo.studio',
-			username: 'richard',
-			name: 'Richard',
+			email: 'alex@purpledreams.io',
+			username: 'alex',
+			name: 'Alex',
 			password: { create: createPassword('alexlovesyou') },
 			connections: {
 				create: {

@@ -2,7 +2,7 @@ import * as setCookieParser from 'set-cookie-parser'
 import { sessionKey } from '#app/utils/auth.server.ts'
 import { authSessionStorage } from '#app/utils/session.server.ts'
 
-export const BASE_URL = 'https://www.salonexpo.studio'
+export const BASE_URL = 'https://www.purpledreams.io'
 
 export function convertSetCookieToCookie(setCookie: string) {
 	const parsedCookie = setCookieParser.parseString(setCookie)

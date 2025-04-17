@@ -160,7 +160,7 @@ export async function action({ request, params }: Route.ActionArgs) {
 }
 
 export const meta: Route.MetaFunction = () => {
-	return [{ title: 'Setup Salon Expo Studio Account' }]
+	return [{ title: 'Setup Purple Dreams Account' }]
 }
 
 export default function OnboardingProviderRoute({

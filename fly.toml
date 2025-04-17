@@ -1,4 +1,4 @@
-app = "salonexpostudio"
+app = "remix-purpledreams"
 primary_region = "ewr"
 kill_signal = "SIGINT"
 kill_timeout = 5

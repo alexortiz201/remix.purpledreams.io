@@ -18,10 +18,10 @@ export const meta: Route.MetaFunction = ({ params, matches }) => {
 	const noteCount = notesMatch?.data?.owner.notes.length ?? 0
 	const notesText = noteCount === 1 ? 'note' : 'notes'
 	return [
-		{ title: `${displayName}'s Notes | Salon Expo Studio` },
+		{ title: `${displayName}'s Notes | Purple Dreams` },
 		{
 			name: 'description',
-			content: `Checkout ${displayName}'s ${noteCount} ${notesText} on Salon Expo Studio`,
+			content: `Checkout ${displayName}'s ${noteCount} ${notesText} on Purple Dreams`,
 		},
 	]
 }

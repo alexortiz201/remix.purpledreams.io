@@ -299,7 +299,7 @@ function PasskeyLogin({
 }
 
 export const meta: Route.MetaFunction = () => {
-	return [{ title: 'Login to Salon Expo Studio' }]
+	return [{ title: 'Login to Purple Dreams' }]
 }
 
 export function ErrorBoundary() {
