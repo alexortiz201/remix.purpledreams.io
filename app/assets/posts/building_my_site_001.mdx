@@ -60,3 +60,37 @@ Had to add `"esModuleInterop": true,` to my tsconfig.json so tailwind.config.ts 
 #### Moving my site from github pages to fly.io
 I took a few steps just cause I'm not the most familiar with all this. First thing I noticed was the even though I was point at my fly.io project with an A record on my apex domain (and AAAA record), after a few hours it was still resolving to vercel's ip. I'm not sure if it was cache but the day before I saw my purpledreams.io resolve after being down when pointing away from github pages with the new records. Well, the next day it was down again. I wasn't sure but github pages tells you to put a CNAME record on the project to point to the domain, I'm not sure if github does something with this, as in pushing this to DNS servers and what not. To make sure github's cname file wasn't causing issues I deleted that. Afterwards, the domain routing was not working yet and it still pointed to vercel's ips. My last step after a lot of looking around was to create the certs through fly.io `fly certs add purpledreams.io` and `fly certs add www.purpledreams.io`. Then, adding a cname record to my domain in the vercel app as suggested by the feedback in the fly.io cli tool. BANG! It's live now!
 I'm not sure if maybe fly.io requires certs in its platform, if certs can't be transferred when changing records or ips, if the cname record was missing, or if having a CNAME file in github pages does something to fudge the DNS server's cache of said CNAME. I'll have to test this out individually to see.
+
+#### The second part of my site
+I wanted to add an admin side to my site to support the use of the DB by other projects that would grant permissions to certain users and their individual sites, aka multi-tenant architecture.
+
+Started with this:
+https://community.fly.io/t/access-same-database-from-two-different-applications/6734
+
+The build kept failing for the salon expo site. It kept printing:
+```bash
+...
+  npm run lint
+  shell: /usr/bin/bash -e {0}
+  env:
+    npm_config_cache: /home/runner/.npm
+
+> lint
+> eslint .
+
+Oops! Something went wrong! :(
+
+ESLint: 9.24.0
+
+Error: Failed to load native binding
+    at Object.<anonymous> (/home/runner/work/remix.salonexpo.studio/remix.salonexpo.studio/node_modules/unrs-resolver/index.js:372:11)
+...
+```
+
+Turns out the github workflow plug doesn't support node-22 only up to lts 20. I'm not sure why my purple dreams built with version 22, but I'm updating and pushing it to my site. Might have to do with some node version caching happening with the plug in.
+`
+	- name: ⎔ Setup node
+			uses: actions/setup-node@v4
+			with:
+				node-version: 22 -> 20
+`
