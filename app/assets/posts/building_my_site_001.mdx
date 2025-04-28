@@ -61,7 +61,8 @@ Had to add `"esModuleInterop": true,` to my tsconfig.json so tailwind.config.ts 
 I took a few steps just cause I'm not the most familiar with all this. First thing I noticed was the even though I was point at my fly.io project with an A record on my apex domain (and AAAA record), after a few hours it was still resolving to vercel's ip. I'm not sure if it was cache but the day before I saw my purpledreams.io resolve after being down when pointing away from github pages with the new records. Well, the next day it was down again. I wasn't sure but github pages tells you to put a CNAME record on the project to point to the domain, I'm not sure if github does something with this, as in pushing this to DNS servers and what not. To make sure github's cname file wasn't causing issues I deleted that. Afterwards, the domain routing was not working yet and it still pointed to vercel's ips. My last step after a lot of looking around was to create the certs through fly.io `fly certs add purpledreams.io` and `fly certs add www.purpledreams.io`. Then, adding a cname record to my domain in the vercel app as suggested by the feedback in the fly.io cli tool. BANG! It's live now!
 I'm not sure if maybe fly.io requires certs in its platform, if certs can't be transferred when changing records or ips, if the cname record was missing, or if having a CNAME file in github pages does something to fudge the DNS server's cache of said CNAME. I'll have to test this out individually to see.
 
-#### The second part of my site
+#### The second part of my site - Salon Expo
+`(I'll prob move this into its own article)`
 I wanted to add an admin side to my site to support the use of the DB by other projects that would grant permissions to certain users and their individual sites, aka multi-tenant architecture.
 
 Started with this:
@@ -94,3 +95,5 @@ Turns out the github workflow plug doesn't support node-22 only up to lts 20. I'
 			with:
 				node-version: 22 -> 20
 `
+
+I had a few issues getting salon expo pointed at purple dreams' database but after a lot of finagling I was got it working. There were a few gotchas that I'm not entirely sure why it works this way. The first, I had to update my litefs.yml and change the consul.key to use the same one as purple dreams. This meant salon expo has another env variable that points to the same key instead of the `APP_NAME` default. That was easy enough but the issue I ran into was the `FLY_CONSUL_URL` would attach salon expo to a cluster with an empty database. This would happen even when I went into Fly.io's admin and added the new secret manually (verified by ssh'ing into the app and logging the env variables). This all finally worked when I used the cli to set the `FLY_CONSUL_URL` secret -> `fly secrets set FLY_CONSUL_URL='...' --app salonexpo`. This did cause an issue when rolling out the chagnes to the servers, where I had to manually ssh back into the servers and clear the clusterid -> `rm /data/litefs/clusterid` and then restart the app -> `fly app restart salonexpo`.
