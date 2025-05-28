@@ -1,0 +1,17 @@
+---
+title: Working with Tailr.fit and learning python.
+publishedOn: 2024-05-28
+---
+
+> Some notes and learnings when working with Tailr.fit, including some python and things I needed to learn for this project.
+
+
+#### Getting started
+I had an idea on how I was going to approach this project. First though, I was going to start off with some python and scripts to capture images using a usb camera. BAM!
+Starting off I ran into *scaffolding*. Coming from JS and or some other langs I've been dabbling in I was looking for some corrolations. I thought I'd need a particular directory structure, some dependancy management and the unknown unknowns. Turns out the unknown uknowns started quick, so by default pip usage should use a virtual env, this is a per python project thing, and you boot the venv and install within it. But even after installing within the venv, there was no dep list like in js e.g. `package.json` and its lock file. You can use something like the `pip freeze > requirements.txt` but versioning becomes cumbersome. So I opted for `pipenv` which creates a virtual env if it doesn't find one and adds the niceness of a Pipfile and a Pipfile.lock.
+
+#### Next
+Once that scoffolding was set up I was able to install opencv-python and activate the venv `pipenv shell` (next to the py file). Check out [Real python: pipenv guide](https://www.realypython.com/pipenv-guide/)
+
+#### After the scaffolding
+I started on the camera capturing service. That was actually easier than expected. I had script to start off from and the help of AI so I had something up in running for a single camera in about 10 minutes. Afterwards, I removed the singular portion of the py script and used the script to capture the the array of camera's (2) frames.
