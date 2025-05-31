@@ -456,5 +456,12 @@ INSERT INTO _RolePermissions VALUES('cm83vfanf001r9nszbznu90qy','cm83vfanq00239n
 INSERT INTO _RolePermissions VALUES('cm83vfanf001u9nszv3lh5ddy','cm83vfanq00239nsz2ipb6ozn');
 INSERT INTO _RolePermissions VALUES('cm83vfanf001x9nszh39lqml3','cm83vfanq00239nsz2ipb6ozn');
 
-INSERT INTO _RoleSites VALUES('cm83vfano00229nsz9uu6bvqt','cm83vfanj00209nszj2wcfi28');
-INSERT INTO _RoleSites VALUES('cm83vfanq00239nsz2ipb6ozn','cm83vfanj00209nszj2wcfi28');
+-- purpledreams
+INSERT INTO _RoleSites VALUES('cm83vfanl00219nsz2s95csi8','cmbcatfyd00009nyk1c331xvg');
+INSERT INTO _RoleSites VALUES('cm83vfano00229nsz9uu6bvqt','cmbcatfyd00009nyk1c331xvg');
+INSERT INTO _RoleSites VALUES('cm83vfanq00239nsz2ipb6ozn','cmbcatfyd00009nyk1c331xvg');
+
+-- salonexpo
+INSERT INTO _RoleSites VALUES('cm83vfanl00219nsz2s95csi8','cmbcatfym00019nykymp8igar');
+INSERT INTO _RoleSites VALUES('cm83vfano00229nsz9uu6bvqt','cmbcatfym00019nykymp8igar');
+INSERT INTO _RoleSites VALUES('cm83vfanq00239nsz2ipb6ozn','cmbcatfym00019nykymp8igar');
