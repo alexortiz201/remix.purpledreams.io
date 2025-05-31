@@ -465,3 +465,19 @@ INSERT INTO _RoleSites VALUES('cm83vfanq00239nsz2ipb6ozn','cmbcatfyd00009nyk1c33
 INSERT INTO _RoleSites VALUES('cm83vfanl00219nsz2s95csi8','cmbcatfym00019nykymp8igar');
 INSERT INTO _RoleSites VALUES('cm83vfano00229nsz9uu6bvqt','cmbcatfym00019nykymp8igar');
 INSERT INTO _RoleSites VALUES('cm83vfanq00239nsz2ipb6ozn','cmbcatfym00019nykymp8igar');
+
+-- insert users
+INSERT INTO User VALUES('cmbcdx5oe00009n1xdy0z3155','alex@purpledreams.io','alex','Alex',1748705191934,1748705191934);
+INSERT INTO User VALUES('cmbcdx5qx00019n1xxq2pmj1a','rich@salonexpo.studio','rich','Rich',1748705192026,1748705192026);
+INSERT INTO Password VALUES('$2b$10$oyqrk9kw4rmKxSfmWLTjyucL4a42cWTVJh1q2Ui0AzVG3zimRvGwS','cmbcdx5oe00009n1xdy0z3155');
+INSERT INTO Password VALUES('$2b$10$hN6YsXY5abO3Uda6SlqSg.3SDvw.qMsmA1CpsYuHZB/Q1xIraRXJC','cmbcdx5qx00019n1xxq2pmj1a');
+
+INSERT INTO _UserRoles VALUES('cm83vfanl00219nsz2s95csi8','cmbcdx5oe00009n1xdy0z3155');
+INSERT INTO _UserRoles VALUES('cm83vfano00229nsz9uu6bvqt','cmbcdx5oe00009n1xdy0z3155');
+INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cmbcdx5oe00009n1xdy0z3155');
+INSERT INTO _UserRoles VALUES('cm83vfano00229nsz9uu6bvqt','cmbcdx5qx00019n1xxq2pmj1a');
+INSERT INTO _UserRoles VALUES('cm83vfanq00239nsz2ipb6ozn','cmbcdx5qx00019n1xxq2pmj1a');
+
+INSERT INTO _UserSites VALUES('cmbcatfyd00009nyk1c331xvg','cmbcdx5oe00009n1xdy0z3155');
+INSERT INTO _UserSites VALUES('cmbcatfym00019nykymp8igar','cmbcdx5oe00009n1xdy0z3155');
+INSERT INTO _UserSites VALUES('cmbcatfym00019nykymp8igar','cmbcdx5qx00019n1xxq2pmj1a');
