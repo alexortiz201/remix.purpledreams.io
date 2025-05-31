@@ -228,15 +228,22 @@ CREATE INDEX "_UserSites_B_index" ON "_UserSites"("B");
 -- Create a sql dump of your database with `sqlite3 prisma/data.db .dump > seed.sql`
 -- Replace the SQL below with your new Roles & Permissions related SQL from `seed.sql`
 
--- console.time('🌐 Created site...')
--- const defaultSite = await prisma.site.create({
--- 	select: { id: true },
--- 	data: {
--- 		name: 'purpledreams',
--- 		description: 'PurpleDreams.io'
--- 	},
--- })
--- console.timeEnd('🌐 Created site...')
+-- console.time('🌐 Created sites...')
+-- const siteList = [
+-- 	{ name: 'purpledreams', description: 'purpledreams.io - Admin site' },
+-- 	{ name: 'salonexpo', description: 'salonexpo.studio - The Salon Expo site' },
+-- ]
+
+-- for (const { name, description } of siteList) {
+-- 	await prisma.site.create({
+-- 		select: { id: true },
+-- 		data: {
+-- 			name,
+-- 			description,
+-- 		},
+-- 	})
+-- }
+-- console.timeEnd('🌐 Created sites...')
 
 -- console.time('🔑 Created permissions...')
 -- const entities = ['user', 'note', 'site', 'role', 'permission', 'connection'];
@@ -296,7 +303,8 @@ CREATE INDEX "_UserSites_B_index" ON "_UserSites"("B");
 -- })
 -- console.timeEnd('👑 Created roles...')
 
-INSERT INTO Site VALUES('cm83vfanj00209nszj2wcfi28','purpledreams','PurpleDreams.io',1741660049072,1741660049072);
+INSERT INTO Site VALUES('cmbcatfyd00009nyk1c331xvg','purpledreams','purpledreams.io - Admin site',1748699979780,1748699979780);
+INSERT INTO Site VALUES('cmbcatfym00019nykymp8igar','salonexpo','salonexpo.studio - The Salon Expo site',1748699979790,1748699979790);
 
 INSERT INTO Permission VALUES('cm83vfane00009nszybczy0t1','create','user','own','',1741660049066,1741660049066);
 INSERT INTO Permission VALUES('cm83vfane00019nszdykqhncn','create','user','site','',1741660049066,1741660049066);

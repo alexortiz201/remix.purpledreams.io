@@ -26,7 +26,7 @@ async function seed() {
 				...userData,
 				password: { create: createPassword(userData.username) },
 				roles: { connect: { name: 'user' } },
-				sites: { connect: { name: 'purpledreams' } },
+				sites: { connect: [{ name: 'salonexpo' }, { name: 'purpledreams' }] },
 			},
 		})
 
@@ -72,7 +72,7 @@ async function seed() {
 	}
 	console.timeEnd(`👤 Created ${totalUsers} users...`)
 
-	console.time(`🐨 Created admin user "alex"`)
+	console.time(`🐨 Created super-admin user "alex"`)
 
 	const alexImages = {
 		alexUser: { objectKey: 'user/kody.png' },
@@ -125,7 +125,7 @@ async function seed() {
 			roles: {
 				connect: [{ name: 'super-admin' }, { name: 'admin' }, { name: 'user' }],
 			},
-			sites: { connect: { name: 'purpledreams' } },
+			sites: { connect: [{ name: 'purpledreams' }, { name: 'salonexpo' }] },
 		},
 	})
 
@@ -247,6 +247,23 @@ async function seed() {
 	}
 
 	console.timeEnd(`🐨 Created admin user "alex"`)
+
+	console.time(`🐨 Created admin for salonexpo user "rich"`)
+	await prisma.user.create({
+		select: { id: true },
+		data: {
+			email: 'rich@salonexpo.studio',
+			username: 'rich',
+			name: 'Rich',
+			password: { create: createPassword('richlovesyou') },
+			roles: {
+				connect: [{ name: 'admin' }, { name: 'user' }],
+			},
+			sites: { connect: [{ name: 'salonexpo' }] },
+		},
+	})
+	console.timeEnd(`🐨 Created admin for salonexpo user "rich"`)
+
 	console.timeEnd(`🌱 Database has been seeded`)
 }
 
