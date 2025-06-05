@@ -1,3 +1,6 @@
+import { Link } from "react-router";
+import { Icon } from "#app/components/ui/icon.tsx";
+
 export default function AboutRoute() {
 	return (
 		<main className="font-poppins grid place-items-center px-4 py-16 font-light xl:grid-cols-1 xl:gap-24">
@@ -13,6 +16,14 @@ export default function AboutRoute() {
 					I <span className="text-[var(--pink)]">love</span> building wonderful web
 					experiences, from the pixel perfect layouts on the frontend to
 					reliable, scalable, and easy to use API’s on the backend.
+				</p>
+				<p className="mt-6 text-right animate-slide-top text-xl/7 text-muted-foreground [animation-delay:1.3s] [animation-fill-mode:backwards] xl:mt-8 xl:animate-slide-left xl:text-xl/6 xl:leading-10 xl:[animation-delay:1s] xl:[animation-fill-mode:backwards]">
+					<Link className="size-[1em] font-normal text-sm text-[var(--turquois)] hover:brightness-80" to="/blog">
+						<Icon className="mr-1" name="chat-bubble">
+							<span className="sr-only">Blog</span>
+						</Icon>
+						<span>Blog</span>
+					</Link>
 				</p>
 			</div>
 		</main>

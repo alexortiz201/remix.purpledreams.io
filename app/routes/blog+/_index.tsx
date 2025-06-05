@@ -23,7 +23,7 @@ export default function PostsList() {
 			<LogoWithSocial />
 			<p className="text-3xl my-4">🙈🙊🙉</p>
 			<p>
-				Blog about things I've found interesting or worth repeating.
+				Blog about things I've found interesting or worth repeating or worth writing down.
 			</p>
 			{posts.length && (
 				<ul className="mt-12 grid gap-x-8 gap-y-6 auto-cols-[minmax(0,2fr)] grid-flow-row md:grid-flow-col">

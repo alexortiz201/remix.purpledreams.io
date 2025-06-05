@@ -277,7 +277,7 @@
 
 .social-btn {
 	&:hover {
-		color: var(--green);
+		color: var(--turquois);
 		transition-duration: 0.3s;
 		transition-property: color;
 	}
