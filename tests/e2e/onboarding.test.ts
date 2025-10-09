@@ -11,7 +11,12 @@ import {
 	USERNAME_MIN_LENGTH,
 } from '#app/utils/user-validation'
 import { readEmail } from '#tests/mocks/utils.ts'
-import { createUser, expect, test as base } from '#tests/playwright-utils.ts'
+import {
+	createUser,
+	expect,
+	test as base,
+	type AppPages,
+} from '#tests/playwright-utils.ts'
 
 const URL_REGEX = /(?<url>https?:\/\/[^\s$.?#].[^\s]*)/
 const CODE_REGEX = /Here's your verification code: (?<code>[\d\w]+)/
@@ -41,10 +46,10 @@ const test = base.extend<{
 	},
 })
 
-test('onboarding with link', async ({ page, getOnboardingData }) => {
+test('onboarding with link', async ({ page, navigate, getOnboardingData }) => {
 	const onboardingData = getOnboardingData()
 
-	await page.goto('/')
+	await navigate('/')
 
 	await page.getByRole('link', { name: /log in/i }).click()
 	await expect(page).toHaveURL(`/login`)
@@ -68,9 +73,9 @@ test('onboarding with link', async ({ page, getOnboardingData }) => {
 	expect(email.to).toBe(onboardingData.email.toLowerCase())
 	expect(email.from).toBe(EMAIL_FROM)
 	expect(email.subject).toMatch(/welcome/i)
-	const onboardingUrl = extractUrl(email.text)
+	const onboardingUrl = extractUrl(email.text) as AppPages
 	invariant(onboardingUrl, 'Onboarding URL not found')
-	await page.goto(onboardingUrl)
+	await navigate(onboardingUrl as string)
 
 	await expect(page).toHaveURL(/\/verify/)
 
@@ -100,20 +105,24 @@ test('onboarding with link', async ({ page, getOnboardingData }) => {
 
 	await expect(page).toHaveURL(`/`)
 
-	await page.getByRole('link', { name: onboardingData.name }).click()
+	await page.getByRole('link', { name: 'User menu' }).click()
 	await page.getByRole('menuitem', { name: /profile/i }).click()
 
 	await expect(page).toHaveURL(`/users/${onboardingData.username}`)
 
-	await page.getByRole('link', { name: onboardingData.name }).click()
+	await page.getByRole('link', { name: 'User menu' }).click()
 	await page.getByRole('menuitem', { name: /logout/i }).click()
 	await expect(page).toHaveURL(`/`)
 })
 
-test('onboarding with a short code', async ({ page, getOnboardingData }) => {
+test('onboarding with a short code', async ({
+	page,
+	navigate,
+	getOnboardingData,
+}) => {
 	const onboardingData = getOnboardingData()
 
-	await page.goto('/signup')
+	await navigate('/signup')
 
 	const emailTextbox = page.getByRole('textbox', { name: /email/i })
 	await emailTextbox.click()
@@ -138,6 +147,7 @@ test('onboarding with a short code', async ({ page, getOnboardingData }) => {
 
 test('completes onboarding after GitHub OAuth given valid user details', async ({
 	page,
+	navigate,
 	prepareGitHubUser,
 }) => {
 	const ghUser = await prepareGitHubUser()
@@ -149,7 +159,7 @@ test('completes onboarding after GitHub OAuth given valid user details', async (
 		}),
 	).toBeNull()
 
-	await page.goto('/signup')
+	await navigate('/signup')
 	await page.getByRole('button', { name: /signup with github/i }).click()
 
 	await expect(page).toHaveURL(/\/onboarding\/github/)
@@ -187,6 +197,7 @@ test('completes onboarding after GitHub OAuth given valid user details', async (
 
 test('logs user in after GitHub OAuth if they are already registered', async ({
 	page,
+	navigate,
 	prepareGitHubUser,
 }) => {
 	const ghUser = await prepareGitHubUser()
@@ -215,7 +226,7 @@ test('logs user in after GitHub OAuth if they are already registered', async ({
 	})
 	expect(connection).toBeNull()
 
-	await page.goto('/signup')
+	await navigate('/signup')
 	await page.getByRole('button', { name: /signup with github/i }).click()
 
 	await expect(page).toHaveURL(`/`)
@@ -236,11 +247,12 @@ test('logs user in after GitHub OAuth if they are already registered', async ({
 
 test('shows help texts on entering invalid details on onboarding page after GitHub OAuth', async ({
 	page,
+	navigate,
 	prepareGitHubUser,
 }) => {
 	const ghUser = await prepareGitHubUser()
 
-	await page.goto('/signup')
+	await navigate('/signup')
 	await page.getByRole('button', { name: /signup with github/i }).click()
 
 	await expect(page).toHaveURL(/\/onboarding\/github/)
@@ -323,24 +335,28 @@ test('shows help texts on entering invalid details on onboarding page after GitH
 	await expect(page.getByText(/thanks for signing up/i)).toBeVisible()
 })
 
-test('login as existing user', async ({ page, insertNewUser }) => {
+test('login as existing user', async ({ page, navigate, insertNewUser }) => {
 	const password = faker.internet.password()
 	const user = await insertNewUser({ password })
 	invariant(user.name, 'User name not found')
-	await page.goto('/login')
+	await navigate('/login')
 	await page.getByRole('textbox', { name: /username/i }).fill(user.username)
 	await page.getByLabel(/^password$/i).fill(password)
 	await page.getByRole('button', { name: /log in/i }).click()
 	await expect(page).toHaveURL(`/`)
 
-	await expect(page.getByRole('link', { name: user.name })).toBeVisible()
+	await expect(page.getByRole('link', { name: 'User menu' })).toBeVisible()
 })
 
-test('reset password with a link', async ({ page, insertNewUser }) => {
+test('reset password with a link', async ({
+	page,
+	navigate,
+	insertNewUser,
+}) => {
 	const originalPassword = faker.internet.password()
 	const user = await insertNewUser({ password: originalPassword })
 	invariant(user.name, 'User name not found')
-	await page.goto('/login')
+	await navigate('/login')
 
 	await page.getByRole('link', { name: /forgot password/i }).click()
 	await expect(page).toHaveURL('/forgot-password')
@@ -357,9 +373,9 @@ test('reset password with a link', async ({ page, insertNewUser }) => {
 	expect(email.subject).toMatch(/password reset/i)
 	expect(email.to).toBe(user.email.toLowerCase())
 	expect(email.from).toBe(EMAIL_FROM)
-	const resetPasswordUrl = extractUrl(email.text)
+	const resetPasswordUrl = extractUrl(email.text) as AppPages
 	invariant(resetPasswordUrl, 'Reset password URL not found')
-	await page.goto(resetPasswordUrl)
+	await navigate(resetPasswordUrl as string)
 
 	await expect(page).toHaveURL(/\/verify/)
 
@@ -387,12 +403,16 @@ test('reset password with a link', async ({ page, insertNewUser }) => {
 
 	await expect(page).toHaveURL(`/`)
 
-	await expect(page.getByRole('link', { name: user.name })).toBeVisible()
+	await expect(page.getByRole('link', { name: 'User menu' })).toBeVisible()
 })
 
-test('reset password with a short code', async ({ page, insertNewUser }) => {
+test('reset password with a short code', async ({
+	page,
+	navigate,
+	insertNewUser,
+}) => {
 	const user = await insertNewUser()
-	await page.goto('/login')
+	await navigate('/login')
 
 	await page.getByRole('link', { name: /forgot password/i }).click()
 	await expect(page).toHaveURL('/forgot-password')

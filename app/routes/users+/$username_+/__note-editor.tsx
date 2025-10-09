@@ -21,7 +21,7 @@ import { Label } from '#app/components/ui/label.tsx'
 import { StatusButton } from '#app/components/ui/status-button.tsx'
 import { Textarea } from '#app/components/ui/textarea.tsx'
 import { cn, getNoteImgSrc, useIsPending } from '#app/utils/misc.tsx'
-import { type Info } from './+types/notes.$noteId_.edit.ts'
+import { type Route } from './+types/notes.$noteId_.edit.ts'
 
 const titleMinLength = 1
 const titleMaxLength = 100
@@ -54,8 +54,8 @@ export function NoteEditor({
 	note,
 	actionData,
 }: {
-	note?: Info['loaderData']['note']
-	actionData?: Info['actionData']
+	note?: Route.ComponentProps['loaderData']['note']
+	actionData?: Route.ComponentProps['actionData']
 }) {
 	const isPending = useIsPending()
 
@@ -110,7 +110,10 @@ export function NoteEditor({
 							<Label>Images</Label>
 							<ul className="flex flex-col gap-4">
 								{imageList.map((imageMeta, index) => {
-									const image = note?.images[index]
+									const imageMetaId = imageMeta.getFieldset().id.value
+									const image = note?.images.find(
+										({ id }) => id === imageMetaId,
+									)
 									return (
 										<li
 											key={imageMeta.key}
@@ -198,7 +201,7 @@ function ImageChooser({
 						>
 							{previewImage ? (
 								<div className="relative">
-									{existingImage ? (
+									{existingImage && !previewImage.startsWith('data:') ? (
 										<Img
 											src={previewImage}
 											alt={altText ?? ''}
@@ -225,7 +228,10 @@ function ImageChooser({
 								</div>
 							)}
 							{existingImage ? (
-								<input {...getInputProps(fields.id, { type: 'hidden' })} />
+								<input
+									{...getInputProps(fields.id, { type: 'hidden' })}
+									key={fields.id.key}
+								/>
 							) : null}
 							<input
 								aria-label="Image"
@@ -245,6 +251,7 @@ function ImageChooser({
 								}}
 								accept="image/*"
 								{...getInputProps(fields.file, { type: 'file' })}
+								key={fields.file.key}
 							/>
 						</label>
 					</div>
@@ -257,6 +264,7 @@ function ImageChooser({
 					<Textarea
 						onChange={(e) => setAltText(e.currentTarget.value)}
 						{...getTextareaProps(fields.altText)}
+						key={fields.altText.key}
 					/>
 					<div className="min-h-[32px] px-4 pt-1 pb-3">
 						<ErrorList

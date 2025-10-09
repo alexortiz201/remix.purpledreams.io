@@ -7,9 +7,9 @@ import { expect, test, createUser, waitFor } from '#tests/playwright-utils.ts'
 
 const CODE_REGEX = /Here's your verification code: (?<code>[\d\w]+)/
 
-test('Users can update their basic info', async ({ page, login }) => {
+test('Users can update their basic info', async ({ page, navigate, login }) => {
 	await login()
-	await page.goto('/settings/profile')
+	await navigate('/settings/profile')
 
 	const newUserData = createUser()
 
@@ -21,11 +21,11 @@ test('Users can update their basic info', async ({ page, login }) => {
 	await page.getByRole('button', { name: /^save/i }).click()
 })
 
-test('Users can update their password', async ({ page, login }) => {
+test('Users can update their password', async ({ page, navigate, login }) => {
 	const oldPassword = faker.internet.password()
 	const newPassword = faker.internet.password()
 	const user = await login({ password: oldPassword })
-	await page.goto('/settings/profile')
+	await navigate('/settings/profile')
 
 	await page.getByRole('link', { name: /change password/i }).click()
 
@@ -52,11 +52,16 @@ test('Users can update their password', async ({ page, login }) => {
 	).toEqual({ id: user.id })
 })
 
-test('Users can update their profile photo', async ({ page, login }) => {
+test('Users can update their profile photo', async ({
+	page,
+	navigate,
+	login,
+}) => {
 	const user = await login()
-	await page.goto('/settings/profile')
+	await navigate('/settings/profile')
 
 	const beforeSrc = await page
+		.getByRole('main')
 		.getByRole('img', { name: user.name ?? user.username })
 
 	await page.getByRole('link', { name: /change profile photo/i }).click()
@@ -64,7 +69,7 @@ test('Users can update their profile photo', async ({ page, login }) => {
 	await expect(page).toHaveURL(`/settings/profile/photo`)
 
 	await page
-		.getByRole('textbox', { name: /change/i })
+		.getByRole('button', { name: /change/i })
 		.setInputFiles('./tests/fixtures/images/user/kody.png')
 
 	await page.getByRole('button', { name: /save/i }).click()
@@ -75,16 +80,24 @@ test('Users can update their profile photo', async ({ page, login }) => {
 	).toHaveURL(`/settings/profile`)
 
 	const afterSrc = await page
+		.getByRole('main')
 		.getByRole('img', { name: user.name ?? user.username })
 
-	expect(beforeSrc.getAttribute('src')).not.toBe(afterSrc.getAttribute('src'));
+	// not sure how to get the before/after src with getAttribute inline
+	// // eslint-disable-next-line playwright/prefer-web-first-assertions
+	// expect(beforeSrc).not.toEqual(afterSrc)
+	expect(beforeSrc.getAttribute('src')).not.toBe(afterSrc.getAttribute('src'))
 })
 
-test('Users can change their email address', async ({ page, login }) => {
+test('Users can change their email address', async ({
+	page,
+	navigate,
+	login,
+}) => {
 	const preUpdateUser = await login()
 	const newEmailAddress = faker.internet.email().toLowerCase()
 	expect(preUpdateUser.email).not.toEqual(newEmailAddress)
-	await page.goto('/settings/profile')
+	await navigate('/settings/profile')
 	await page.getByRole('link', { name: /change email/i }).click()
 	await page.getByRole('textbox', { name: /new email/i }).fill(newEmailAddress)
 	await page.getByRole('button', { name: /send confirmation/i }).click()

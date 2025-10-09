@@ -18,8 +18,8 @@ import { getNoteImgSrc, useIsPending } from '#app/utils/misc.tsx'
 import { requireUserWithPermission } from '#app/utils/permissions.server.ts'
 import { redirectWithToast } from '#app/utils/toast.server.ts'
 import { userHasPermission, useOptionalUser } from '#app/utils/user.ts'
-import { type Route, type Info } from './+types/notes.$noteId.ts'
-import { type Info as notesInfo } from './+types/notes.ts'
+import { type Route } from './+types/notes.$noteId.ts'
+import { type Route as NotesRoute } from './+types/notes.ts'
 
 export async function loader({ params }: Route.LoaderArgs) {
 	const note = await prisma.note.findUnique({
@@ -32,6 +32,7 @@ export async function loader({ params }: Route.LoaderArgs) {
 			updatedAt: true,
 			images: {
 				select: {
+					id: true,
 					altText: true,
 					objectKey: true,
 				},
@@ -123,7 +124,7 @@ export default function NoteRoute({
 			<div className={`${displayBar ? 'pb-24' : 'pb-12'} overflow-y-auto`}>
 				<ul className="flex flex-wrap gap-5 py-5">
 					{loaderData.note.images.map((image) => (
-						<li key={image.objectKey}>
+						<li key={image.id}>
 							<a href={getNoteImgSrc(image.objectKey)}>
 								<Img
 									src={getNoteImgSrc(image.objectKey)}
@@ -173,7 +174,7 @@ export function DeleteNote({
 	actionData,
 }: {
 	id: string
-	actionData: Info['actionData'] | undefined
+	actionData: Route.ComponentProps['actionData'] | undefined
 }) {
 	const isPending = useIsPending()
 	const [form] = useForm({
@@ -205,7 +206,7 @@ export function DeleteNote({
 export const meta: Route.MetaFunction = ({ data, params, matches }) => {
 	const notesMatch = matches.find(
 		(m) => m?.id === 'routes/users+/$username_+/notes',
-	) as { data: notesInfo['loaderData'] } | undefined
+	) as { data: NotesRoute.ComponentProps['loaderData'] } | undefined
 
 	const displayName = notesMatch?.data?.owner.name ?? params.username
 	const noteTitle = data?.note.title ?? 'Note'
