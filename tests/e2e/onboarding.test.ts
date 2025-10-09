@@ -75,7 +75,7 @@ test('onboarding with link', async ({ page, navigate, getOnboardingData }) => {
 	expect(email.subject).toMatch(/welcome/i)
 	const onboardingUrl = extractUrl(email.text) as AppPages
 	invariant(onboardingUrl, 'Onboarding URL not found')
-	await navigate(onboardingUrl as string)
+	await navigate(onboardingUrl)
 
 	await expect(page).toHaveURL(/\/verify/)
 
@@ -375,7 +375,7 @@ test('reset password with a link', async ({
 	expect(email.from).toBe(EMAIL_FROM)
 	const resetPasswordUrl = extractUrl(email.text) as AppPages
 	invariant(resetPasswordUrl, 'Reset password URL not found')
-	await navigate(resetPasswordUrl as string)
+	await navigate(resetPasswordUrl)
 
 	await expect(page).toHaveURL(/\/verify/)
 
