@@ -1,0 +1,29 @@
+---
+title: Learning Mcp development.
+publishedOn: 2025-10-09
+---
+
+> Some notes and learnings when working with MCP Servers, and things that might be related or helpful in the future.
+
+
+#### Getting started
+TBD
+
+#### Links:
+
+Model Context Protocol:
+> The MCP Standard and related links.
+- [MCP Standards](https://modelcontextprotocol.io/docs/getting-started/intro)
+- [MCP Repo](https://github.com/modelcontextprotocol)
+- [MCP Typsecript SDK](https://github.com/modelcontextprotocol)
+
+Shopify:
+> Remote-dom for MCP UI.
+- [remote-dom](https://github.com/Shopify/remote-dom)
+
+Cloudflare:
+> Cloudflare has a lot of uniques, and easy of deployments when it comes to MCP servers.
+- [Sunil Pai's Thoughts](https://blog.cloudflare.com/author/sunil/)
+> `code-mod` with "dynamic worker loaders" could mean "better" MCP Servers. Potentially, this will reduce complexity when managing security for MCP servers. Also, I'm a fan of the reduced token carry over in the models' reasoning chain. In essence, these two will allow "unique" case code generation (throw away code) that will be run inside a sandbox which later communicates back to the MCP server via postMessage with results.
+- [code-mod](https://blog.cloudflare.com/code-mode/)
+- [dynamic worker loaders](https://developers.cloudflare.com/workers/runtime-apis/bindings/worker-loader/)
